@@ -1,4 +1,4 @@
-![SCHub](./SCHub/landing_page/images/SCHub-removebg-preview.png)
+![SCHub]([./SCHub/landing_page/images/SCHub-removebg-preview.png](https://github.com/micoliser/SCHub/raw/main/landing_page/images/SCHub-removebg-preview.png))
 
 ![GitHub contributors](https://img.shields.io/github/contributors/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fgithub.com%2Fmicoliser%2FSCHub%2Fcommits%2Fmain) ![GitHub language count](https://img.shields.io/github/languages/count/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub Discussions](https://img.shields.io/github/discussions/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub repo size](https://img.shields.io/github/repo-size/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.schub.me%2Fapi%2Fstatus&query=status&style=for-the-badge&label=API%20status&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fwww.schub.me%2Fapi%2Fstatus)
 
@@ -88,28 +88,10 @@ PUT
 
 [API Documentation](https://www.schub.me/apidocs)
 
-### Web page
-
-![architecture](./SCHub/schub/src/images/architecture.gif)
-
-#### Admins
-
-![Admin Dashboard](./SCHub/landing_page/images/admin_dashboard.PNG)
-![Manage Students](./SCHub/schub/src/images/student.PNG)
-![Update](./SCHub/schub/src/images/update.PNG)
-
-#### Students
-
-![Student Dashboard](./SCHub/schub/src/images/student_dash.PNG)
-
-#### Teachers
-
-![Teacher Dashboard](./SCHub/landing_page/images/teacher_dashboard.PNG)
-
 ## Contributing
 
 Pull requests are welcome, but please contact us first. For major changes, please open an issue first to discuss what you would like to change.  
-Ensure to read the [contribution](CONTRIBUTING.md) and [conduct](CODE_OF_CONDUCT.md) pages.
+Ensure to read the [contribution](https://github.com/micoliser/SCHub/blob/main/CONTRIBUTING.md) and [conduct](https://github.com/micoliser/SCHub/blob/main/CODE_OF_CONDUCT.md) pages.
 Please make sure to update tests as appropriate and document changes properly.
 
 ### Contributors
