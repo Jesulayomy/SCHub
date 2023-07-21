@@ -1,4 +1,4 @@
-![SCHub](./landing_page/images/SCHub-removebg-preview.png)
+![SCHub](./SCHub/landing_page/images/SCHub-removebg-preview.png)
 
 ![GitHub contributors](https://img.shields.io/github/contributors/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fgithub.com%2Fmicoliser%2FSCHub%2Fcommits%2Fmain) ![GitHub language count](https://img.shields.io/github/languages/count/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub Discussions](https://img.shields.io/github/discussions/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub repo size](https://img.shields.io/github/repo-size/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.schub.me%2Fapi%2Fstatus&query=status&style=for-the-badge&label=API%20status&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fwww.schub.me%2Fapi%2Fstatus)
 
@@ -90,21 +90,21 @@ PUT
 
 ### Web page
 
-![architecture](./schub/src/images/architecture.gif)
+![architecture](./SCHub/schub/src/images/architecture.gif)
 
 #### Admins
 
-![Admin Dashboard](./landing_page/images/admin_dashboard.PNG)
-![Manage Students](./schub/src/images/student.PNG)
-![Update](./schub/src/images/update.PNG)
+![Admin Dashboard](./SCHub/landing_page/images/admin_dashboard.PNG)
+![Manage Students](./SCHub/schub/src/images/student.PNG)
+![Update](./SCHub/schub/src/images/update.PNG)
 
 #### Students
 
-![Student Dashboard](./schub/src/images/student_dash.PNG)
+![Student Dashboard](./SCHub/schub/src/images/student_dash.PNG)
 
 #### Teachers
 
-![Teacher Dashboard](./landing_page/images/teacher_dashboard.PNG)
+![Teacher Dashboard](./SCHub/landing_page/images/teacher_dashboard.PNG)
 
 ## Contributing
 

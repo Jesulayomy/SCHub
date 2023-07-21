@@ -1,0 +1,3 @@
+[submodule "SCHub"]
+	path = SCHub
+	url = https://github.com/micoliser/SCHub.git
