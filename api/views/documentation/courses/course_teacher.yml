@@ -1,0 +1,48 @@
+Retrieves the teacher of a specific course
+---
+tags:
+  - Courses
+parameters:
+  - name: course_id
+    in: path
+    description: The ID of the course
+    required: true
+    schema:
+      type: string
+responses:
+  200:
+    description: "Request returned successfully"
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            created_at:
+              type: string
+              description: Time of creation of the Teacher
+            department_id:
+              type: string
+              description: The UUID of the Teacher's department
+            email:
+              type: string
+              description: Teacher's email
+            first_name:
+              type: string
+              description: Teacher's first name
+            id:
+              type: string
+              description: The UUID of the Teacher
+            last_name:
+              type: string
+              description: Teacher's last name
+            recovery_question:
+              type: string
+              description: Teacher's password recovery question
+        example:
+          created_at: "2017-03-25T02:17:06"
+          department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+          email: "MELVEND@schub.com"
+          first_name: "MELVEN"
+          id: "53af4926-52ee-41d0-9acc-ae7230400014"
+          last_name: "DARRAL"
+          recovery_question: "What is the name of your childhood best friend?"

@@ -1,0 +1,102 @@
+.form-container {
+    width: 60%;
+    margin: 10% auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.login-container button,
+.login-form input {
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: 30px;
+    color: #FFFFFE;
+}
+
+.login-container button {
+    width: 70%;
+    font-weight: bold;
+    margin: 15px auto;
+    background-color: #7F5AF0;
+    border: none;
+    padding: 4% 5%;
+    cursor: pointer;
+}
+
+.login-form {
+    width: 70%;
+}
+
+.login-form input, .login-form button {
+    width: 100%;
+    border: 3px solid #7F5AF0;
+    background-color: #16161A;
+    margin: 10px auto;
+    text-align: center;
+    padding: 5%;
+}
+
+.login-form button.disabled {
+    background-color: grey;
+    border: none;
+}
+
+.login-container input[type='submit'], .login-container button.disabled {
+    font-weight: bold;
+}
+
+.login-container input[type='submit']:hover {
+    background-color: #7F5AF0;
+    cursor: pointer;
+}
+
+.login-student {
+    background-image: url('../images/light-student.png');
+}
+
+.login-teacher {
+    background-image: url('../images/light-teacher.png');
+    background-size: 28%;
+    background-position: right 6% center;
+}
+
+.login-admin {
+    background-image: url('../images/light-admin.png');
+}
+
+.login-student,
+.login-admin {
+    background-size: 20%;
+    background-position: right 10% center;
+}
+
+.login-student, .login-teacher, .login-admin {
+    background-repeat: no-repeat;
+}
+
+/* Media queries for responsive */
+@media screen and (max-width: 900px) {
+    .login-container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .form-container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .login-container, .form-container {
+        width: 100%;
+    }
+}

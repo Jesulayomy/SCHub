@@ -1,0 +1,51 @@
+Retrieves a teacher from the DB
+---
+tags:
+  - Teachers
+parameters:
+  - name: teacher_id
+    in: path
+    type: string
+    required: true
+    description: The id of the teacher to retrieve
+responses:
+  404:
+    description: A teacher with the id does not exist
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: object
+      properties:
+        created_at:
+          type: string
+          description: Time of creation of the Teacher
+        id:
+          type: string
+          description: The UUID of the Teacher
+        email:
+          type: string
+          description: Teacher's email
+        recovery_question:
+          type: string
+          description: Teacher's password recovery question
+        first_name:
+          type: string
+          description: Teacher's first name
+        last_name:
+          type: string
+          description: Teacher's last name
+        department:
+          type: string
+          description: Department in which the teacher works
+        department_id:
+          type: string
+          description: The UUID of the department in which the teacher works
+      example:
+        created_at: "2017-03-25T02:17:06"
+        department: "Agricultural Engineering"
+        department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+        email: "DJUMAR@schub.com"
+        first_name: "DJUMA"
+        id: "53af4926-52ee-41d0-9acc-ae7230400015"
+        last_name: "RINALDO"
+        recovery_question: "What is the name of your childhood best friend?"

@@ -1,0 +1,31 @@
+Retrieves a department from the DB
+---
+tags:
+  - Departments
+parameters:
+  - name: department_id
+    in: path
+    type: string
+    required: true
+    description: The id of the department to retrieve
+responses:
+  404:
+    description: A department with the id does not exist
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: object
+      properties:
+        created_at:
+          type: string
+          description: Time of creation of the Department
+        id:
+          type: string
+          description: The UUID of the Department
+        name:
+          type: string
+          description: Department's name
+      example:
+        created_at: "2017-03-25T02:17:06"
+        id: "53af4926-52ee-41d0-9acc-ae7230300001"
+        name: "Aerospace Engineering"

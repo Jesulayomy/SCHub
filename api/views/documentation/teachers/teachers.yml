@@ -1,0 +1,95 @@
+Retrieves all teachers from the DB
+---
+tags:
+  - Teachers
+responses:
+  200:
+    description: "Request returned successfully"
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              created_at:
+                type: string
+                description: Time of creation of the Teacher
+              department:
+                type: string
+                description: Teacher's department
+              department_id:
+                type: string
+                description: The uuid of the Teacher's department
+              email:
+                type: string
+                description: Teacher's email
+              first_name:
+                type: string
+                description: Teacher's first name
+              id:
+                type: string
+                description: The uuid of the Teacher
+              last_name:
+                type: string
+                description: Teacher's last name
+              recovery_question:
+                type: string
+                description: Teacher's password recovery question
+        example:
+          - created_at: "2017-03-25T02:17:06"
+            department: "Aerospace Engineering"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            email: "NORRIND@schub.com"
+            first_name: "NORRIN"
+            id: "53af4926-52ee-41d0-9acc-ae7230400001"
+            last_name: "DANYAR"
+            recovery_question: "What is your mother's maiden name?"
+          - created_at: "2017-03-25T02:17:06"
+            department: "Aerospace Engineering"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            email: "LARISJ@schub.com"
+            first_name: "LARIS"
+            id: "53af4926-52ee-41d0-9acc-ae7230400002"
+            last_name: "JACKSON-GRANT"
+            recovery_question: "What is your mother's maiden name?"
+          - created_at: "2017-03-25T02:17:06"
+            department: "Aerospace Engineering"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            email: "GRAEME-JAMESC@schub.com"
+            first_name: "GRAEME-JAMES"
+            id: "53af4926-52ee-41d0-9acc-ae7230400003"
+            last_name: "CONSTADINOS"
+            recovery_question: "What is your mother's maiden name?"
+          - created_at: "2017-03-25T02:17:06"
+            department: "Aerospace Engineering"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            email: "KAHNEILL@schub.com"
+            first_name: "KAHNEIL"
+            id: "53af4926-52ee-41d0-9acc-ae7230400004"
+            last_name: "LUCIAN-BAILEY"
+            recovery_question: "What is your mother's maiden name?"
+          - created_at: "2017-03-25T02:17:06"
+            department: "Aerospace Engineering"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            email: "BARTOLOMEOE@schub.com"
+            first_name: "BARTOLOMEO"
+            id: "53af4926-52ee-41d0-9acc-ae7230400005"
+            last_name: "ELISA"
+            recovery_question: "What is your favorite football team?"
+          - created_at: "2017-03-25T02:17:06"
+            department: "Aerothermal Engineering"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300002"
+            email: "TIAREK@schub.com"
+            first_name: "TIARE"
+            id: "53af4926-52ee-41d0-9acc-ae7230400006"
+            last_name: "KILISI"
+            recovery_question: "What is your favorite football team?"
+          - created_at: "2017-03-25T02:17:06"
+            department: "Aerothermal Engineering"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300002"
+            email: "ILGVARSR@schub.com"
+            first_name: "ILGVARS"
+            id: "53af4926-52ee-41d0-9acc-ae7230400007"
+            last_name: "RAVINESH"
+            recovery_question: "What is your favorite football team?"

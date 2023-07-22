@@ -1,0 +1,86 @@
+.loading {
+    width: 30%;
+    margin: 10px auto;
+}
+
+.loading h4 {
+    margin-top: 20px;
+}
+
+table {
+    position: relative;
+    width: 95%;
+    margin: auto;
+    text-align: left;
+}
+
+th, tr, td {
+    padding: 5px;
+}
+
+button {
+    cursor: pointer;
+}
+
+button.update,
+button.delete {
+    display: inline-block;
+    padding: 5px 7px;
+    border: none;
+    border-radius: 10px;
+    color: #FFFFFE;
+}
+
+button.update {
+    background-color: #2CB67D;
+
+}
+
+button.delete {
+    background-color: red;
+}
+
+.deleting {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+}
+
+.deleting p {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.deleting button {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: #FFFFFE;
+}
+
+button.back {
+    background-color: #2CB67D;
+}
+
+button.more {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 15px;
+    color: #FFFFFE;
+    background-color: #2CB67D;
+}
+
+/* Media queries for responsive */
+@media screen and (max-width: 1000px) {
+    .table-div {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    table {
+        width: 100%;
+    }
+}

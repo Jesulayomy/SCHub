@@ -1,0 +1,53 @@
+Retrieves all courses from the DB
+---
+tags:
+  - Courses
+responses:
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          created_at:
+            type: string
+            description: time of creation of the Course
+          department:
+            type: string
+            description: Course's department
+          department_id:
+            type: string
+            description: The uuid of the Course's department
+          id:
+            type: string
+            description: The uuid of the Course
+          level:
+            type: integer
+            description: Course's level
+          name:
+            type: string
+            description: Course's name
+          teacher:
+            type: string
+            description: Course's teacher
+          teacher_id:
+            type: string
+            description: The uuid of the Course's teacher
+      example:
+        - created_at: "2017-03-25T02:17:06"
+          department: "Agricultural Engineering"
+          department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+          id: "53af4926-52ee-41d0-9acc-ae7230500031"
+          level: 100
+          name: "Math for Agricultural Engineering"
+          teacher: "JEMMIE IRVINE"
+          teacher_id: "53af4926-52ee-41d0-9acc-ae7230400011"
+        - created_at: "2017-03-25T02:17:06"
+          department: "Agricultural Engineering"
+          department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+          id: "53af4926-52ee-41d0-9acc-ae7230500032"
+          level: 100
+          name: "Eng for Agricultural Engineering"
+          teacher: "MAZI AADIL"
+          teacher_id: "53af4926-52ee-41d0-9acc-ae7230400012"

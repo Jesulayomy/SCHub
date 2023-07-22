@@ -1,0 +1,127 @@
+.manage {
+    width: 90%;
+    margin: 2% auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.manage a  {
+    color: #FFFFFE;
+    display: inline-block;
+    background-color: #2CB67D;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.search {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 60%;
+    margin: 10px auto;
+}
+
+.search p {
+    position: absolute;
+    top: 100%;
+    left: 7%;
+}
+
+.search input, .search button  {
+    height: 100%;
+    display: inline-block;
+    padding: 5px 20px;
+    border-radius: 25px;
+    margin: 3px;
+    background-color: #16161A;
+    border: 2px solid #2CB67D;
+    color: #FFFFFE;
+}
+
+.search input {
+    width: 60%;
+}
+
+.search input:focus {
+    outline: none;
+}
+
+.search button {
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color: #2CB67D;
+}
+
+.filter {
+    margin-bottom: 30px;
+}
+
+.filter h3 {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 3%;
+}
+
+.filters {
+    width: 23%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    padding-bottom: 15px;
+    border-radius: 30px;
+}
+
+.filters select, .filters button {
+    display: inline-block;
+    color: #FFFFFE;
+    padding: 5px;
+    background-color: #16161A;
+    border: 2px solid #2CB67D;
+    margin-top: 5px;
+}
+
+.filters button:hover {
+    background-color: #2CB67D;
+}
+
+/* Media queries for responsive */
+@media screen and (max-width: 1000px) {
+    .manage {
+        width: 98%;
+    }
+
+    .filters {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 351px) and (max-width: 500px) {
+    .search {
+        width: 90%;
+    }
+
+    .filters {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .search {
+        width: 100%;
+    }
+
+    .filters {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.59defb23.css",
+    "main.js": "/static/js/main.bed96a2d.js",
+    "static/media/architecture.gif": "/static/media/architecture.f87a578e2f32029cd393.gif",
+    "static/media/student.PNG": "/static/media/student.58c59e4bae9f824edccc.PNG",
+    "static/media/student_dash.PNG": "/static/media/student_dash.bac9b4664e06eeaa0ff7.PNG",
+    "static/media/SCHub-title.png": "/static/media/SCHub-title.d8ce43847669f8011ef0.png",
+    "static/media/update.PNG": "/static/media/update.5c918c88d8f3474382df.PNG",
+    "static/media/dark-teacher.png": "/static/media/dark-teacher.796b3bc597fbc46f155e.png",
+    "static/media/dark-student.png": "/static/media/dark-student.8510349030672d5b0e88.png",
+    "static/media/light-student.png": "/static/media/light-student.ad2cadb27de8ff9ac541.png",
+    "static/media/light-admin.png": "/static/media/light-admin.f117907061835573c26c.png",
+    "static/media/main-roof.png": "/static/media/main-roof.fed9ba2b5aafe77b7872.png",
+    "static/media/light-teacher.png": "/static/media/light-teacher.49ff82a716b44a14993f.png",
+    "index.html": "/index.html",
+    "main.59defb23.css.map": "/static/css/main.59defb23.css.map",
+    "main.bed96a2d.js.map": "/static/js/main.bed96a2d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.59defb23.css",
+    "static/js/main.bed96a2d.js"
+  ]
+}

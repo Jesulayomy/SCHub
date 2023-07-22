@@ -1,0 +1,15 @@
+Retrieve API status
+---
+tags:
+  - Analytics
+responses:
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          description: API status
+      example:
+        status: "OK"

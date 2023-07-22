@@ -1,0 +1,80 @@
+form.create {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+form.reset {
+    margin-top: 10%;
+}
+
+form.create h3 {
+    margin-bottom: 10px;
+}
+
+form.create input, form.create select, form.create button {
+    display: inline-block;
+    border-radius: 20px;
+    margin: 10px auto;
+    width: 60%;
+    background-color: #16161A;
+    border: 2px solid #2CB67D;
+    padding: 15px;
+    color: #FFFFFE;
+}
+
+form.create input[type="submit"], form.create button {
+    width: 20%;
+    padding: 10px;
+    color: #FFFFFE;
+    border: none;
+}
+
+form.create input[type="submit"], form.create button {
+    cursor: pointer;
+    background-color: #2CB67D;
+}
+
+form.create button.disabled {
+    background-color: grey;
+}
+
+/* Media queries for responsive */
+@media screen and (max-width: 850px) {
+    form.create {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    form.create {
+        width: 90%;
+    }
+
+    form.create input,
+    form.create select {
+        width: 70%;
+    }
+
+    form.create button,
+    form.create input[type="submit"] {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    form.create {
+        width: 90%;
+    }
+
+    form.create input,
+    form.create select {
+        width: 90%;
+        padding: 10px;
+    }
+
+    form.create button,
+    form.create input[type="submit"] {
+        width: 40%;
+    }
+}

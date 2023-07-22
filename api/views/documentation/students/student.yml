@@ -1,0 +1,67 @@
+Retrieves a student from the DB
+---
+tags:
+  - Students
+parameters:
+  - name: student_id
+    in: path
+    type: string
+    required: true
+    description: The id of the student to retrieve
+responses:
+  404:
+    description: A student with the id does not exist
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: object
+      properties:
+        created_at:
+          type: string
+          description: Time of creation of the Student
+        id:
+          type: string
+          description: The UUID of the Student
+        email:
+          type: string
+          description: Student's email
+        recovery_question:
+          type: string
+          description: Student's password recovery question
+        first_name:
+          type: string
+          description: Student's first name
+        last_name:
+          type: string
+          description: Student's last name
+        age:
+          type: integer
+          description: Student's age
+        current_level:
+          type: integer
+          description: Student's current academic level
+        department:
+          type: string
+          description: Student's department
+        department_id:
+          type: string
+          description: The UUID of the Student's department
+        matric_no:
+          type: string
+          description: Student's matriculation number
+        start_level:
+          type: integer
+          description: Student's starting academic level
+      example:
+        created_at: "2017-03-25T02:17:06"
+        email: "ALIRIZAP@schub.com"
+        first_name: "ALIRIZA"
+        id: "53af4926-52ee-41d0-9acc-ae7230200030"
+        last_name: "PALYOLOGOS"
+        recovery_question: "What is your favorite football team?"
+        age: 30
+        current_level: 400
+        department: "Agricultural Engineering"
+        department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+        matric_no: "202210030AP"
+        start_level: 400

@@ -1,0 +1,9 @@
+DB_DEV_HOST = localhost
+DB_DEV_USER = schub_dev
+DB_DEV_PASSWORD = {PASSWORD}
+DB_DEV_DB = schub
+DB_TEST_HOST = localhost
+DB_TEST_USER = schub_test
+DB_TEST_PASSWORD = {PASSWORD}
+DB_TEST_DB = schub_test_db
+SECRET_KEY = {SECRET_KEY}

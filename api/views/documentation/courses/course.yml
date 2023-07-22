@@ -1,0 +1,51 @@
+Retrieves a course from the DB
+---
+tags:
+  - Courses
+parameters:
+  - name: course_id
+    in: path
+    type: string
+    required: true
+    description: The id of the course to retrieve
+responses:
+  404:
+    description: A course with the id does not exist
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: object
+      properties:
+        created_at:
+          type: string
+          description: Time of creation of the Course
+        id:
+          type: string
+          description: The UUID of the Course
+        name:
+          type: string
+          description: Course's name
+        teacher:
+          type: string
+          description: Name of the course teacher
+        teacher_id:
+          type: string
+          description: The UUID of the course teacher
+        level:
+          type: integer
+          description: Course's academic level
+        department:
+          type: string
+          description: Department offering the course
+        department_id:
+          type: string
+          description: The UUID of the department offering the course
+      example:
+        created_at: "2017-03-25T02:17:06"
+        department: "Agricultural Engineering"
+        department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+        id: "53af4926-52ee-41d0-9acc-ae7230500044"
+        level: 400
+        name: "Circuit-Techniques for Agricultural Engineering"
+        teacher: "MELVEN DARRAL"
+        teacher_id: "53af4926-52ee-41d0-9acc-ae7230400014"

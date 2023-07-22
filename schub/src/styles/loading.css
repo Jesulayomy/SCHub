@@ -1,0 +1,10 @@
+div.loading {
+    width: 30%;
+    margin: 5% auto;
+    text-align: center;
+}
+
+div.loading div {
+    display: flex;
+    justify-content: center;
+}

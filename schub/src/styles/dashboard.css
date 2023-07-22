@@ -1,0 +1,126 @@
+section.dashboard {
+    width: 70%;
+    margin: 7% auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+section.dashboard h1 {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border: 4px solid #787878;
+}
+
+section.dashboard h3 {
+    border-bottom: 2px solid #787878;
+    margin-bottom: 10px;
+}
+
+.courses {
+    padding: 1px;
+}
+
+.teacher-details {
+    font-style: italic;
+    color: aqua;
+}
+
+.details, .logo-student, .logo-teacher {
+    border: 3px solid #787878;
+}
+
+.logo-student {
+    background-image: url('../images/dark-student.png');
+}
+
+.logo-teacher {
+    background-image: url('../images/dark-teacher.png');
+}
+
+.details {
+    width: 65%;
+    padding: 15px 10px;
+}
+
+.logo-student, .logo-teacher {
+    width: 33%;
+    background-size: 200%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.student_list {
+    padding-bottom: 10px;
+}
+
+section.dashboard span {
+    font-weight: bold;
+    display: inline-block;
+    padding: 3px 5px;
+    margin-right: 5px;
+    padding-left: 0;
+    color: #2CB67D;
+}
+
+.para:hover {
+    cursor: pointer;
+    position: relative;
+}
+
+.para.student.show:hover::after {
+    content: 'Show teacher';
+}
+
+.para.student.hide:hover::after {
+    content: 'Hide teacher';
+}
+
+.para.teacher.show:hover::after {
+    content: 'Show students';
+}
+
+.para.teacher.hide:hover::after {
+    content: 'Hide students';
+}
+
+.para:hover::after {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    color: #333;
+}
+
+.dashboard button {
+    display: inline-block;
+    background-color: #2CB67D;
+    margin-top: 15px;
+    padding: 6px;
+    color: #FFFFFE;
+    cursor: pointer;
+    border: none;
+}
+
+/* Media queries for responsive */
+@media screen and (max-width: 500px) {
+    .logo-student, .logo-teacher, .details {
+        width: 100%;
+    }
+
+    .logo-student, .logo-teacher {
+        height: 250px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    section.dashboard {
+        width: 90%;
+    }
+}

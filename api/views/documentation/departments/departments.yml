@@ -1,0 +1,31 @@
+Retrieves all departments from the DB
+---
+tags:
+  - Departments
+responses:
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          created_at:
+            type: string
+            description: time of creation of the Department
+          id:
+            type: string
+            description: The uuid of the Department
+          name:
+            type: string
+            description: Department's name
+      example:
+        - created_at: "2017-03-25T02:17:06"
+          id: "53af4926-52ee-41d0-9acc-ae7230300001"
+          name: "Aerospace Engineering"
+        - created_at: "2017-03-25T02:17:06"
+          id: "53af4926-52ee-41d0-9acc-ae7230300002"
+          name: "Aerothermal Engineering"
+        - created_at: "2017-03-25T02:17:06"
+          id: "53af4926-52ee-41d0-9acc-ae7230300003"
+          name: "Agricultural Engineering"

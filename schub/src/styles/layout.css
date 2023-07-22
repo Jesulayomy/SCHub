@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color:#16161A;
+    color: #FFFFFE;
+    min-height: 100%;
+}
+
+.home {
+    text-align: center;
+}
+
+.home h1 {
+    font-size: 3rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 4%;
+    height: 95px;
+}
+
+header div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 80%;
+    width: 30%;
+}
+
+header .head, header .sign {
+    display: inline-block;
+    text-decoration: none;
+    color: #FFFFFE;
+}
+
+header .head {
+    font-size: xx-large;
+    font-weight: bold;
+    padding: 25px;
+    background-image: url('../images/main-roof.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position-x: 6%;
+}
+
+header .sign {
+    border: 3px solid #7F5AF0;
+    background-color: #16161A;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.sign-div .sign {
+    min-height: 40px;
+    height: 75%;
+    padding: 0 7%;
+}
+
+.sign-div .dash {
+    min-height: 40px;
+    margin-right: 20px;
+    line-height: 1.9;
+    border-color: #2CB67D;
+}
+
+.sign-div .sign:hover {
+    background-color: #7F5AF0;
+}
+.sign-div .dash:hover {
+    background-color: #2CB67D;
+}
+
+input:focus {
+    outline: none;
+}
+
+input[type='submit']#disabled, input[type='submit']#disabled:hover {
+    background-color: lightgray;
+    border: none;
+    color: darkgray;
+    cursor: not-allowed;
+}
+
+/* Media queries for responsive */
+@media screen and (max-width: 700px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+    header {
+        padding-left: 0;
+    }
+
+    .sign-div {
+        height: 50px;
+    }
+
+    header .sign {
+        font-size: 1rem;
+    }
+
+    .sign-div .sign {
+        max-height: 40px;
+        padding: 0 10px;
+    }
+
+    .sign-div .dash {
+        max-height: 40px;
+        margin-right: 10px;
+    }
+}

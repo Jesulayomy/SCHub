@@ -1,0 +1,73 @@
+Retrieves all students from the DB
+---
+tags:
+  - Students
+responses:
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          age:
+            type: integer
+            description: Student's age
+          created_at:
+            type: string
+            description: time of creation of the Student
+          current_level:
+            type: integer
+            description: Student's current level
+          department:
+            type: string
+            description: Student's department
+          department_id:
+            type: string
+            description: The uuid of the Student's department
+          email:
+            type: string
+            description: Student's email
+          first_name:
+            type: string
+            description: Student's first name
+          id:
+            type: string
+            description: The uuid of the Student
+          last_name:
+            type: string
+            description: Student's last name
+          matric_no:
+            type: string
+            description: Student's matriculation number
+          recovery_question:
+            type: string
+            description: Student's password recovery question
+          start_level:
+            type: integer
+            description: Student's starting level
+      example:
+        - age: 22
+          created_at: "2017-03-25T02:17:06"
+          current_level: 400
+          department: "Agricultural Engineering"
+          department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+          email: "CHADEJ@schub.com"
+          first_name: "CHADE"
+          id: "53af4926-52ee-41d0-9acc-ae7230200020"
+          last_name: "JASUR"
+          matric_no: "202210020CJ"
+          recovery_question: "What is the name of your childhood best friend?"
+          start_level: 400
+        - age: 28
+          created_at: "2017-03-25T02:17:06"
+          current_level: 100
+          department: "Agricultural Engineering"
+          department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+          email: "CAREXC@schub.com"
+          first_name: "CAREX"
+          id: "53af4926-52ee-41d0-9acc-ae7230200021"
+          last_name: "CARMELLO"
+          matric_no: "202210021CC"
+          recovery_question: "What is the name of your childhood best friend?"
+          start_level: 100

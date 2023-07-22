@@ -1,0 +1,31 @@
+Retrieve API statistics
+---
+tags:
+  - Analytics
+responses:
+  200:
+    description: "Request returned successfully"
+    schema:
+      type: object
+      properties:
+        admins:
+          type: integer
+          description: Number of admins
+        courses:
+          type: integer
+          description: Number of courses
+        departments:
+          type: integer
+          description: Number of departments
+        students:
+          type: integer
+          description: Number of students
+        teachers:
+          type: integer
+          description: Number of teachers
+      example:
+        admins: 2
+        courses: 45
+        departments: 3
+        students: 30
+        Teachers: 15

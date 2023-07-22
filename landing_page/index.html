@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SCHub</title>
+    <link rel="icon" href="/explore/images/main-roof.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #16161a;
+        color: #fffffe;
+      }
+
+      .primary-border {
+        border-color: #7f5af0;
+      }
+
+      .tertiary-color {
+        color: #2cb67d;
+      }
+
+      .cover-bg {
+        background-image: url("/explore/images/cover.png");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        position: relative;
+      }
+
+      .cover-div {
+        min-height: 100%;
+      }
+
+      .cover-art-div {
+        max-height: 100%;
+        position: absolute;
+        width: auto;
+        display: block;
+        bottom: 10%;
+        left: 40%;
+        transform: translateX(-35%);
+        margin-bottom: 2%;
+      }
+
+      .img-cover {
+        width: 100%;
+        height: 100%;
+      }
+
+      #footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #16161a;
+        padding: 20px;
+        display: none;
+      }
+
+      #plans {
+        margin-bottom: 50px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      @media (max-width: 767px) {
+        .navbar-brand {
+          margin-right: 0;
+        }
+      }
+
+      .navbar-nav {
+        margin-left: auto;
+      }
+
+      .navbar-brand {
+        font-size: x-large;
+        padding: 20px;
+        background-image: url("/explore/images/main-roof.png");
+        background-repeat: no-repeat;
+        background-size: 60%;
+        background-position-y: 5px;
+        background-position-x: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="https://www.schub.me">SCHub</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item px-2">
+              <a class="nav-link" href="#features">Features</a>
+            </li>
+            <li class="nav-item px-2">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item px-2">
+              <a class="nav-link" href="#plans">Plans</a>
+            </li>
+            <li class="nav-item px-2">
+              <a
+                class="nav-link"
+                href="https://www.linkedin.com/pulse/schub-project-jesulayomi-aina"
+                target="_blank"
+                >Blog</a
+              >
+            </li>
+            <li class="nav-item px-2">
+              <a
+                class="nav-link"
+                href="https://github.com/micoliser/SCHub"
+                target="_blank"
+                >GitHub</a
+              >
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    <!-- Cover page -->
+    <div class="container-fluid text-center mt-1 pb-5 cover-bg" id="cover">
+      <div class="cover-div">
+        <div class="cover-art-div">
+          <img
+            src="/explore/images/SCHub-removebg-preview.png"
+            alt="SCHub Cover"
+            class="img-cover"
+          />
+          <p class="lead display-6">
+            A web application serving institution's data through an API
+          </p>
+          <a
+            href="https://www.schub.me"
+            target="https://www.schub.me"
+            class="btn btn-outline-success"
+            style="
+              --bs-btn-padding-y: 0.25rem;
+              --bs-btn-padding-x: 0.5rem;
+              --bs-btn-font-size: 2.5rem;
+            "
+            >Visit SCHub</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Features section -->
+    <section id="features" class="bg-dark text-light py-5">
+      <div class="container">
+        <h2 class="text-center mb-4 display-4">Features</h2>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <img src="/explore/images/student.PNG" alt="Administration" class="img-fluid" />
+            <h4 class="mt-3">Administration</h4>
+            <p>
+              Effortlessly manage and organize school/university data with our
+              intuitive administration feature.
+            </p>
+          </div>
+          <div class="col-md-6 mb-4">
+            <img src="/explore/images/wwwapi.PNG" alt="API" class="img-fluid" />
+            <h4 class="mt-3">API Integration</h4>
+            <p>
+              Seamlessly integrate our API into your existing systems to access
+              real-time school/university data.
+            </p>
+          </div>
+          <div class="col-md-6 mb-4">
+            <img src="/explore/images/login.png" alt="Login" class="img-fluid" />
+            <h4 class="mt-3">Secure Login</h4>
+            <p>
+              Protect sensitive information with our robust and secure login
+              system for authorized access.
+            </p>
+          </div>
+          <div class="col-md-6 mb-4">
+            <img
+              src="/explore/images/student_dash.PNG"
+              alt="Accessible relevant data for students and teachers"
+              class="img-fluid"
+            />
+            <h4 class="mt-3">User Dashboards</h4>
+            <p>Users can access data relevant to them, like student's courses and teachers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About section -->
+    <section id="about" class="py-0 mx-1">
+      <div class="container-fluid justify-content-center">
+        <h2 class="text-center mb-4">About SCHub</h2>
+        <p class="text-center">
+          SCHub was inspired by the need to find efficient solutions for
+          managing educational institutions. Our mission is to provide a
+          comprehensive and user-friendly platform for schools and universities
+          to access and utilize their data effectively.
+        </p>
+        <h2 class="text-center mb-0 mt-5">Developers</h2>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <div class="card mb-4 bg-dark text-white">
+              <img
+                src="https://avatars.githubusercontent.com/u/113533393?s=96&v=4"
+                alt="Creator 1"
+                class="card-img-top"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Aina Jesulayomi</h5>
+                <p class="card-text">Full-stack Engineer</p>
+                <div class="d-flex justify-content-evenly">
+                  <a
+                    href="https://github.com/jesulayomy"
+                    target="_blank"
+                    class="btn btn-outline-success me-2"
+                    >GitHub</a
+                  >
+                  <a
+                    href="https://www.linkedin.com/in/jesulayomi-aina-27389524a"
+                    target="_blank"
+                    class="btn btn-outline-success me-2"
+                    >LinkedIn</a
+                  >
+                  <a
+                    href="https://www.jesulayomy.tech"
+                    target="_blank"
+                    class="btn btn-outline-success me-2"
+                    >Website</a
+                  >
+                  <a
+                    href="https://twitter.com/jesulayomi11"
+                    class="btn btn-outline-success me-2"
+                    >Twitter</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4 bg-dark text-white">
+              <img
+                src="https://avatars.githubusercontent.com/u/108087255?v=4"
+                alt="Creator 2"
+                class="card-img-top"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Samuel Iwelumo</h5>
+                <p class="card-text">Full-stack Engineer</p>
+                <div class="d-flex justify-content-evenly">
+                  <a
+                    href="https://github.com/micoliser"
+                    target="_blank"
+                    class="btn btn-outline-success me-2"
+                    >GitHub</a
+                  >
+                  <a
+                    href="https://www.linkedin.com/in/samuel-iwelumo-8a43a6219"
+                    target="_blank"
+                    class="btn btn-outline-success me-2"
+                    >LinkedIn</a
+                  >
+                  <a
+                    href="https://www.samueliwelumo.tech"
+                    target="_blank"
+                    class="btn btn-outline-success me-2"
+                    >Website</a
+                  >
+                  <a
+                    href="https://twitter.com/micoliser"
+                    target="_blank"
+                    class="btn btn-outline-success me-2"
+                    >Twitter</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plans/Goals section -->
+    <section id="plans" class="bg-dark text-light py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Plans & Goals</h2>
+        <p class="text-center">
+          Our future plans for SCHub include expanding the range of data fields
+          supported and continuously improving the design and user experience.
+          We strive to provide a comprehensive solution for educational
+          institutions' needs.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-light py-3" id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <p class="mb-0">SCHub &copy; 2023. All rights reserved.</p>
+          </div>
+          <div class="col-md-9">
+            <div class="text-end">
+              <a class="text-light px-2" href="#features">Features</a>
+              <a class="text-light px-2" href="#about">About</a>
+              <a class="text-light px-2" href="#plans">Plans</a>
+              <a
+                class="text-light px-2"
+                href="https://github.com/micoliser/SCHub"
+                target="_blank"
+                >GitHub</a
+              >
+              <a href="https://github.com/micoliser/SCHub/blob/main/LICENSE" class="text-light px-2"
+                >Terms of Service</a
+              >
+              <a
+                href="https://github.com/micoliser/SCHub/blob/main/CODE_OF_CONDUCT.md"
+                class="text-light px-2"
+                >Privacy Policy</a
+              >
+              <a
+                href="https://github.com/micoliser/SCHub/tree/main#introduction"
+                class="text-light px-2"
+                >Contact Us</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      window.addEventListener("scroll", function () {
+        var content = document.getElementById("cover");
+        var footer = document.getElementById("footer");
+
+        var contentBottom = content.getBoundingClientRect().bottom;
+        var viewportHeight = window.innerHeight;
+
+        if (contentBottom < viewportHeight) {
+          footer.style.display = "block";
+        } else {
+          footer.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
