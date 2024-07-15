@@ -74,7 +74,7 @@ app.config['SWAGGER'] = {
     'version': '1.0.0',
     'description': 'API documentation for SCHub',
     'specs_route': '/apidocs/',
-    'host': 'app.schub.me',
+    'host': 'schub-api.jesulayomi.tech',
     'termsOfService': 'None',
     'contact': '{"Name": "Aina Jesulayomi", "email": "Jesulayomi081@gmail.com"\
 }, {"Name": "Samuel Iwelumo", "email": "micoliser@gmail.com"}'
