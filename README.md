@@ -1,22 +1,28 @@
 ![SCHub](./landing_page/images/SCHub-removebg-preview.png)
 
-![GitHub contributors](https://img.shields.io/github/contributors/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fgithub.com%2Fmicoliser%2FSCHub%2Fcommits%2Fmain) ![GitHub language count](https://img.shields.io/github/languages/count/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub Discussions](https://img.shields.io/github/discussions/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub repo size](https://img.shields.io/github/repo-size/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.schub.me%2Fapi%2Fstatus&query=status&style=for-the-badge&label=API%20status&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fwww.schub.me%2Fapi%2Fstatus)
+![GitHub contributors](https://img.shields.io/github/contributors/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fgithub.com%2Fmicoliser%2FSCHub%2Fcommits%2Fmain) ![GitHub language count](https://img.shields.io/github/languages/count/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub Discussions](https://img.shields.io/github/discussions/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub repo size](https://img.shields.io/github/repo-size/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0)  
+---  
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstatus&query=status&style=for-the-badge&label=API%20status&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstatus) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=courses&style=for-the-badge&label=Courses&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=students&style=for-the-badge&label=Students&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=teachers&style=for-the-badge&label=Teachers&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=departments&style=for-the-badge&label=Departments&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats)
 
 ---
 
-### Introduction
+## Introduction
 
 SCHub is a webservice that transforms the manner in which institutions, like universities and colleges, handle data storage for students, teachers, departments and courses in a secure and user-friendly setting. It incorporates technologies like MySQL, Python, ReactJS, Nginx and Haproxy to create a robust tech infrastructure for data access and management.  
-Home: [SCHub](https://www.schub.me/explore)  
-Article: [Blog post](https://www.schub.me/blog)  
-Devs: [Aina Jesulayomi](https://www.linkedin.com/in/jesulayomi-aina-27389524a/) / [Micoliser](https://www.linkedin.com/in/samuel-iwelumo-8a43a6219/)  
+Home: [SCHub](https://schub.jesulayomi.tech/explore)  
+Article: [Blog post](https://www.linkedin.com/pulse/schub-project-jesulayomi-aina)  
+Devs: [Aina Jesulayomi](https://www.linkedin.com/in/jesulayomi/) / [Micoliser](https://www.linkedin.com/in/samuel-iwelumo-8a43a6219/)  
+
+For accessing the web application for testing purposes, please see [Public Access](#public-access)  
+
+---
 
 ## Installation
 
 Clone the repository:
 
 ```bash
-~ $ git clone https://github.com/micoliser/SCHub.git
+~ $ git clone https://github.com/Jesulayomy/SCHub.git
 ~ $ cd SCHub
 /SCHub $
 ```
@@ -51,14 +57,14 @@ Press CTRL+C to quit
 On another terminal . . .
 
 ```bash
-/SCHub $ cd data/small
+/SCHub $ cd data/
 /small $ python3 -m generate_dump.py
-/SCHub $ cd ../../
-/SCHub $ cat data/small/dump.sql | mysql -u root -p
+/SCHub $ cd ../
+/SCHub $ cat data/dump.sql | mysql -u root -p
 /SCHub $ curl http://localhost:5000/api/status
 {"status": "OK"}
 /SCHub $ curl http://localhost:5000/api/stats
-{"admins":2,"courses":45,"departments":3,"students":30,"teachers":15}
+{"admins":53,"courses":127,"departments":24,"students":1357,"teachers":32}
 ```
 
 ## Usage
@@ -86,7 +92,31 @@ PUT
 {"age":28,"created_at":"2017-03-25T02:17:06","current_level":400,"department_id":"53af4926-52ee-41d0-9acc-ae7230300003","email":"JESSIE-JAMIEN@schub.com","first_name":"JESSIE-JAMIE","id":"53af4926-52ee-41d0-9acc-ae7230200029","last_name":"NHIM","matric_no":"202110029JN","recovery_question":"What is your favorite football team?","start_level":200}
 ```
 
-[API Documentation](https://www.schub.me/apidocs)
+---
+
+### PUBLIC ACCESS
+
+[API Documentation](https://schub-api.jesulayomi.tech/apidocs/)
+
+You can use the following login details to access the site:
+```json
+{
+  "admin": {
+    "email": "tester@schub.com",
+    "password": "testerpwd"
+  },
+  "teacher": {
+    "email": "TUANN@schub.com",
+    "password": "TUANNPWD"
+  },
+  "student": {
+    "email": "GREAMEM@schub.com",
+    "password": "GREAMEMPWD"
+  }
+}
+```
+
+---
 
 ### Web page
 
