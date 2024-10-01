@@ -11,7 +11,7 @@
 SCHub is a webservice that transforms the manner in which institutions, like universities and colleges, handle data storage for students, teachers, departments and courses in a secure and user-friendly setting. It incorporates technologies like MySQL, Python, ReactJS, Nginx and Haproxy to create a robust tech infrastructure for data access and management.  
 Home: [SCHub](https://schub.jesulayomi.tech/explore)  
 Article: [Blog post](https://www.linkedin.com/pulse/schub-project-jesulayomi-aina)  
-Devs: [Aina Jesulayomi](https://www.linkedin.com/in/jesulayomi/) / [Micoliser](https://www.linkedin.com/in/samuel-iwelumo-8a43a6219/)  
+Owners: [Aina Jesulayomi](https://www.linkedin.com/in/jesulayomi/) / [Micoliser](https://www.linkedin.com/in/samuel-iwelumo-8a43a6219/)  
 
 For accessing the web application for testing purposes, please see [Public Access](#public-access)  
 
@@ -151,4 +151,4 @@ Please make sure to update tests as appropriate and document changes properly.
 
 ## Licensing
 
-[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
+MIT License

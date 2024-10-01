@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for considering contributing to SCHub! Before you proceed, we kindly request that you first discuss the changes you wish to make with the owners of this repository. You can reach out to us via linkedin [Jesulayomy](https://www.linkedin.com/in/jesulayomi-aina-27389524a/) / [Micolise](https://www.linkedin.com/in/samuel-iwelumo-8a43a6219/), email [Jesulayomy](mailto:jesulayoMY@gmail.com) / [Micoliser](mailto:micoliser@gmail.com), or any other method of communication. This initial discussion will help ensure that your contribution aligns with the project's goals and prevents any duplication of efforts.
+Thank you for considering contributing to SCHub! Before you proceed, we kindly request that you first discuss the changes you wish to make with the owners of this repository. Please create an issue  (or discussion) regarding the contribution or reply to an existing issue (or discussion) you wish to address and discuss the changes you plan to make, also you can reach out to us on [discord](https://discord.com/users/488238079753060353), via linkedin at [Jesulayomy](https://www.linkedin.com/in/jesulayomi-aina-27389524a/), or [email](mailto:jesulayoMY@gmail.com). This initial discussion will help ensure that your contribution aligns with the project's goals and prevents any duplication of efforts.
 
 As a contributor to SCHub, please adhere to our code of conduct in all your interactions with the project. We strive to maintain an inclusive and respectful environment for everyone involved.
 
@@ -9,11 +9,30 @@ As a contributor to SCHub, please adhere to our code of conduct in all your inte
 To streamline the process of merging your changes into the main repository, please follow these steps:
 
 1. Before initiating a build, make sure to remove any unnecessary install or build dependencies.
-2. Update the README.md file to include clear details of the changes you've made to the interface. This includes documenting new environment variables, exposed ports, useful file locations, and any relevant container parameters.
-3. Increment the version numbers in any example files and the README.md to reflect the new version that your Pull Request represents. We adhere to the [SemVer](http://semver.org/) versioning scheme.
-4. Once you are ready to merge your Pull Request, kindly obtain the sign-off of at least one developers. If you don't have the necessary permissions, you can request a reviewer to merge it on your behalf.
+2. Update the CHANGELOG.md file to include clear details of the changes you've made to the project. This includes documenting new environment variables, exposed ports, useful file locations, and any relevant container parameters.
+3. Once you are ready to merge your Pull Request, kindly obtain the sign-off of at least one maintainer. If you don't have the necessary permissions, you can request a reviewer to merge it on your behalf.
 
 We appreciate your cooperation in following this process, as it helps maintain the quality and integrity of the SCHub codebase.
+
+---
+
+## Hacktoberfest Contributions
+
+If you are participating in Hacktoberfest, we welcome your contributions to SCHub. However, please note that we will only accept Pull Requests that meet the following criteria:
+
+- Addressess an existing issue or bug in the project.
+- Adds a new feature or functionality to the project. (Create an issue first to discuss the feature you intend to add.) New issues must be approved first by a maintainer to avoid rejected PRs.
+- Improves the project's documentation or code quality.
+
+Also ensure you are registered for hacktoberfest:
+
+1. Register for Hacktoberfest: Head over to the Hacktoberfest website to register. Your contributions to this repository will count towards your Hacktoberfest progress.
+
+2. Fork the Repository: Start by forking the repository to your GitHub account. Then clone the forked repository to your local machine.
+
+3. Then proceed to make your changes and create a pull request to the hacktoberfest branch `(DO NOT MAKE PRs TO main FOR HACKTOBERFEST)`. 
+
+---
 
 ## Code of Conduct
 
