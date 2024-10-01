@@ -55,7 +55,8 @@ def login():
         return make_response(jsonify({'message': 'user not found'}), 404)
 
 
-@auth.route('/logout')
+@auth.route('/logout',
+            strict_slashes=False)
 @login_required
 def logout():
     """ Log the user out """
@@ -67,7 +68,8 @@ def logout():
     return response
 
 
-@auth.route('/auth_status')
+@auth.route('/auth_status',
+            strict_slashes=False)
 def auth_status():
     """ Checks the authentication status """
 
@@ -78,7 +80,9 @@ def auth_status():
     return jsonify({'authenticated': False})
 
 
-@auth.route('/verify-recovery/<id>', methods=['POST'])
+@auth.route('/verify-recovery/<id>',
+            methods=['POST'],
+            strict_slashes=False)
 def verify_recovery(id):
     """ Checks and verifies recovery_answer for a user """
 
