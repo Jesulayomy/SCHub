@@ -9,8 +9,8 @@ As a contributor to SCHub, please adhere to our code of conduct in all your inte
 To streamline the process of merging your changes into the main repository, please follow these steps:
 
 1. Before initiating a build, make sure to remove any unnecessary install or build dependencies.
-2. Update the CHANGELOG.md file to include clear details of the changes you've made to the project. This includes documenting new environment variables, exposed ports, useful file locations, and any relevant container parameters.
-3. Once you are ready to merge your Pull Request, kindly obtain the sign-off of at least one maintainer. If you don't have the necessary permissions, you can request a reviewer to merge it on your behalf.
+2. Update the CHANGELOG.md file to include details of the changes you've made to the project. This includes documenting new environment variables, exposed ports, useful file locations, and any relevant container parameters.
+3. Once you are ready to merge your Pull Request, ensure it contains the text "[Hacktoberfest]" in it's title, then kindly obtain the sign-off of at least one maintainer. You can request a reviewer to merge it on your behalf to the hacktoberfest branch.
 
 We appreciate your cooperation in following this process, as it helps maintain the quality and integrity of the SCHub codebase.
 
@@ -20,7 +20,7 @@ We appreciate your cooperation in following this process, as it helps maintain t
 
 If you are participating in Hacktoberfest, we welcome your contributions to SCHub. However, please note that we will only accept Pull Requests that meet the following criteria:
 
-- Addressess an existing issue or bug in the project.
+- Addresses an existing issue or bug in the project.
 - Adds a new feature or functionality to the project. (Create an issue first to discuss the feature you intend to add.) New issues must be approved first by a maintainer to avoid rejected PRs.
 - Improves the project's documentation or code quality.
 

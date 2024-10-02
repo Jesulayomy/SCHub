@@ -16,6 +16,9 @@ Owners: [Aina Jesulayomi](https://www.linkedin.com/in/jesulayomi/) / [Micoliser]
 For accessing the web application for testing purposes, please see [Public Access](#public-access)  
 
 ---
+To contribute to this repo, please see [Contributing](#contributing), [Code of Conduct](CODE_OF_CONDUCT.md), Issues and the Discussions page.
+
+---
 
 ## Installation
 
