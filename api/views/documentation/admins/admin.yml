@@ -1,4 +1,5 @@
-Retreives an admin from the DB
+Retrieves an admin from the database using the admin's ID
+
 ---
 tags:
   - Admins
@@ -7,38 +8,42 @@ parameters:
     in: path
     type: string
     required: true
-    description: The id of the admin to retrieve
+    description: The ID of the admin to retrieve
 responses:
   404:
-    description: An admin with the id does not exist
+    description: Admin with the specified ID does not exist
   200:
-    description: "Request returned sucessfully"
-    schema:
-      type: object
-      items:
-        properties:
-          created_at:
-            type: string
-            description: time of creation of the User
-          id:
-            type: string
-            description: The uuid of the User
-          email:
-             type: string
-             description: User's email
-          recovery_question:
-             type: string
-             description: User's password recovery question
-          first_name:
-             type: string
-             description: User's first name
-          last_name:
-             type: string
-             description: user's last name
-      example:
-        "created_at": "2017-03-25T02:17:06"
-        "email": "jesulayomi@schub.com"
-        "first_name": "Aina"
-        "id": "53af4926-52ee-41d0-9acc-ae7230000001"
-        "last_name": "Jesulayomi"
-        "recovery_question": "What is your baby's name"
+    description: Request returned successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            created_at:
+              type: string
+              format: date-time
+              description: Time of creation of the admin
+            id:
+              type: string
+              format: uuid
+              description: The UUID of the admin
+            email:
+              type: string
+              format: email
+              description: Admin's email address
+            recovery_question:
+              type: string
+              description: Admin's password recovery question
+            first_name:
+              type: string
+              description: Admin's first name
+            last_name:
+              type: string
+              description: Admin's last name
+        example:
+          created_at: "2017-03-25T02:17:06Z"
+          email: "jesulayomi@schub.com"
+          first_name: "Aina"
+          id: "53af4926-52ee-41d0-9acc-ae7230000001"
+          last_name: "Jesulayomi"
+          recovery_question: "What is your baby's name?"
