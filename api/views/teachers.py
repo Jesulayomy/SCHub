@@ -11,7 +11,8 @@ from flasgger.utils import swag_from
     '/teachers',
     methods=['GET', 'POST'],
     strict_slashes=False)
-@swag_from('documentation/teachers/teachers.yml')
+@swag_from('documentation/teachers/teachers.yml', methods=['GET'])
+@swag_from('documentation/teachers/new_teachers.yml', methods=['POST'])
 def teachers():
     """
         Configures GET and POST methods for the teachers route
@@ -66,7 +67,9 @@ def teachers():
     '/teachers/<teacher_id>',
     methods=['GET', 'PUT', 'DELETE'],
     strict_slashes=False)
-@swag_from('documentation/teachers/teacher.yml')
+@swag_from('documentation/teachers/teacher.yml', methods=['GET'])
+@swag_from('documentation/teachers/delete_teacher.yml', methods=['DELETE'])
+@swag_from('documentation/teachers/update_teacher.yml', methods=['PUT'])
 def teacher(teacher_id):
     """
         Configures GET, PUT and DELETE for the teacher route

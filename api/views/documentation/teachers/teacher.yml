@@ -1,7 +1,8 @@
-Retrieves a teacher from the DB
+Retrieves a teacher from the DB using their ID
 ---
 tags:
   - Teachers
+summary: Retrieve a teacher using their ID
 parameters:
   - name: teacher_id
     in: path

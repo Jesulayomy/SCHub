@@ -1,0 +1,23 @@
+Delete a teacher
+---
+tags:
+  - Teachers
+summary: Delete a teacher by their ID
+parameters:
+  - in: path
+    name: teacher_id
+    description: ID of the event to delete
+    required: true
+    type: string
+responses:
+  204:
+    description: Event Deleted
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Message confirming event deletion
+          example: Event deleted
+  404:
+    description: Event not found
