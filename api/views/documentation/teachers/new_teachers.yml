@@ -1,0 +1,84 @@
+Adds a new teacher to the DB 
+---
+tags:
+  - Teachers
+summary: Create a new teacher
+parameters:
+  - in: body
+    name: teacher
+    description: Teacher object containing data
+    required: true
+    schema:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Teacher's email
+        recovery_question:
+          type: string
+          description: Teacher's password recovery question
+        first_name:
+          type: string
+          description: Teacher's first name
+        last_name:
+          type: string
+          description: Teacher's last name
+        department_id:
+          type: string
+          description: The UUID of the department in which the teacher works
+        recovery_answer:
+          type: string
+          description: Tha answer to the recovery question
+        password:
+          type: string
+          description: Teacher's password
+      example:
+        created_at: "2017-03-25T02:17:06"
+        department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+        email: "DJUMARR@schub.com"
+        first_name: "DJUMARR"
+        last_name: "RINALDOR"
+        recovery_question: "What is the name of your childhood best friend?"
+        recovery_answer: "Amogus"
+        password: "12345678"
+responses:
+  200:
+    description: Teacher created successfully
+    schema:
+      type: object
+      properties:
+        created_at:
+          type: string
+          description: Time of creation of the Teacher
+        id:
+          type: string
+          description: The UUID of the Teacher
+        email:
+          type: string
+          description: Teacher's email
+        recovery_question:
+          type: string
+          description: Teacher's password recovery question
+        first_name:
+          type: string
+          description: Teacher's first name
+        last_name:
+          type: string
+          description: Teacher's last name
+        department:
+          type: string
+          description: Department in which the teacher works
+        department_id:
+          type: string
+          description: The UUID of the department in which the teacher works
+      example:
+        created_at: "2017-03-25T02:17:06"
+        department: "Agricultural Engineering"
+        department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
+        email: "DJUMAR@schub.com"
+        first_name: "DJUMA"
+        id: "53af4926-52ee-41d0-9acc-ae7230400015"
+        last_name: "RINALDO"
+        recovery_question: "What is the name of your childhood best friend?"
+  400:
+    description: Bad request, invalid JSON or missing required fields
