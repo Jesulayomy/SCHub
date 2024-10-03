@@ -1,73 +1,137 @@
-Retrieves all students from the DB
+Students API
 ---
 tags:
   - Students
-responses:
-  200:
-    description: "Request returned successfully"
-    schema:
-      type: array
-      items:
-        type: object
-        properties:
-          age:
-            type: integer
-            description: Student's age
-          created_at:
-            type: string
-            description: time of creation of the Student
-          current_level:
-            type: integer
-            description: Student's current level
-          department:
-            type: string
-            description: Student's department
-          department_id:
-            type: string
-            description: The uuid of the Student's department
-          email:
-            type: string
-            description: Student's email
-          first_name:
-            type: string
-            description: Student's first name
-          id:
-            type: string
-            description: The uuid of the Student
-          last_name:
-            type: string
-            description: Student's last name
-          matric_no:
-            type: string
-            description: Student's matriculation number
-          recovery_question:
-            type: string
-            description: Student's password recovery question
-          start_level:
-            type: integer
-            description: Student's starting level
-      example:
-        - age: 22
-          created_at: "2017-03-25T02:17:06"
-          current_level: 400
-          department: "Agricultural Engineering"
-          department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
-          email: "CHADEJ@schub.com"
-          first_name: "CHADE"
-          id: "53af4926-52ee-41d0-9acc-ae7230200020"
-          last_name: "JASUR"
-          matric_no: "202210020CJ"
-          recovery_question: "What is the name of your childhood best friend?"
-          start_level: 400
-        - age: 28
-          created_at: "2017-03-25T02:17:06"
-          current_level: 100
-          department: "Agricultural Engineering"
-          department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
-          email: "CAREXC@schub.com"
-          first_name: "CAREX"
-          id: "53af4926-52ee-41d0-9acc-ae7230200021"
-          last_name: "CARMELLO"
-          matric_no: "202210021CC"
-          recovery_question: "What is the name of your childhood best friend?"
-          start_level: 100
+get:
+  summary: Retrieves all students from the database
+  parameters:
+    - name: level
+      in: query
+      type: integer
+      description: Filter students by current level
+    - name: email
+      in: query
+      type: string
+      description: Filter student by email address
+  responses:
+    200:
+      description: Request returned successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Student'
+          example:
+            - created_at: "2023-04-15T10:30:00Z"
+              id: "53af4926-52ee-41d0-9acc-ae7230000001"
+              first_name: "John"
+              last_name: "Doe"
+              age: 20
+              matric_no: "2023/001"
+              department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+              department: "Computer Science"
+              start_level: 100
+              current_level: 200
+              email: "john.doe@example.com"
+    404:
+      description: No student found with the specified email
+
+post:
+  summary: Creates a new student
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/StudentCreate'
+  responses:
+    201:
+      description: Student created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Student'
+    400:
+      description: Bad request (missing required fields or invalid JSON)
+
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: Time of creation of the student record
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the student
+        first_name:
+          type: string
+          description: Student's first name
+        last_name:
+          type: string
+          description: Student's last name
+        age:
+          type: integer
+          description: Student's age
+        matric_no:
+          type: string
+          description: Student's matriculation number
+        department_id:
+          type: string
+          format: uuid
+          description: The UUID of the student's department
+        department:
+          type: string
+          description: Name of the student's department
+        start_level:
+          type: integer
+          description: Student's starting academic level
+        current_level:
+          type: integer
+          description: Student's current academic level
+        email:
+          type: string
+          format: email
+          description: Student's email address
+    StudentCreate:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - age
+        - matric_no
+        - department_id
+        - start_level
+        - current_level
+        - email
+      properties:
+        first_name:
+          type: string
+          description: Student's first name
+        last_name:
+          type: string
+          description: Student's last name
+        age:
+          type: integer
+          description: Student's age
+        matric_no:
+          type: string
+          description: Student's matriculation number
+        department_id:
+          type: string
+          format: uuid
+          description: The UUID of the student's department
+        start_level:
+          type: integer
+          description: Student's starting academic level
+        current_level:
+          type: integer
+          description: Student's current academic level
+        email:
+          type: string
+          format: email
+          description: Student's email address
