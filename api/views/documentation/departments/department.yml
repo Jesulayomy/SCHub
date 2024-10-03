@@ -1,4 +1,4 @@
-Retrieves a department from the DB
+Department API
 ---
 tags:
   - Departments
@@ -7,25 +7,82 @@ parameters:
     in: path
     type: string
     required: true
-    description: The id of the department to retrieve
-responses:
-  404:
-    description: A department with the id does not exist
-  200:
-    description: "Request returned successfully"
-    schema:
+    description: The ID of the department to retrieve, update, or delete
+
+get:
+  summary: Retrieves a department from the database
+  responses:
+    200:
+      description: Request returned successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Department'
+          example:
+            created_at: "2017-03-25T02:17:06"
+            id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            name: "Agricultural Engineering"
+    404:
+      description: Department with the specified ID does not exist
+
+put:
+  summary: Updates an existing department
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/DepartmentUpdate'
+        example:
+          name: "Updated Agricultural Engineering"
+  responses:
+    200:
+      description: Department updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Department'
+          example:
+            created_at: "2017-03-25T02:17:06"
+            id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            name: "Updated Agricultural Engineering"
+    400:
+      description: Bad request (invalid JSON)
+    404:
+      description: Department with the specified ID does not exist
+
+delete:
+  summary: Deletes a department
+  responses:
+    200:
+      description: Department deleted successfully
+      content:
+        application/json:
+          schema:
+            type: object
+          example: {}
+    404:
+      description: Department with the specified ID does not exist
+
+components:
+  schemas:
+    Department:
       type: object
       properties:
-        created_at:
-          type: string
-          description: Time of creation of the Department
         id:
           type: string
-          description: The UUID of the Department
+          format: uuid
+          description: The UUID of the department
         name:
           type: string
-          description: Department's name
-      example:
-        created_at: "2017-03-25T02:17:06"
-        id: "53af4926-52ee-41d0-9acc-ae7230300001"
-        name: "Aerospace Engineering"
+          description: Name of the department
+        created_at:
+          type: string
+          format: date-time
+          description: Time of creation of the department record
+    DepartmentUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the department
