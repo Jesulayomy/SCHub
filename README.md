@@ -30,10 +30,16 @@ Clone the repository:
 /SCHub $
 ```
 
-Install Python dependencies with [pip](https://pip.pypa.io/en/stable/).
+Install Python dependencies with [pip](https://pip.pypa.io/en/stable/), set the environment variables, and mysql database user.
 
 ```bash
 /SCHub $ pip install -r configurations/requirements.txt
+/SCHub $ pre-commit install
+/SCHub $ cp configurations/environment .env
+/SCHub $ vi .env # Use as a guide
+...
+/SCHub $ mysql -u root -p # Setup mysql user
+...
 ```
 
 Install react dependencies with [npm](https://www.npmjs.com/).

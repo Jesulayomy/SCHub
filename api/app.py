@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 """ The main app route for the db storage """
 
-from models import storage
-from api.views import app_views
-from api.auths import auth
-from os import environ, getenv
-from flask import Flask, render_template, make_response, jsonify
+from os import environ
+from flask import Flask, make_response, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager
 from flasgger import Swagger
-from flasgger.utils import swag_from
 from dotenv.main import load_dotenv
+
+from models import storage
+from api.views import app_views
+from api.auths import auth
 
 
 app = Flask(__name__)
@@ -74,7 +74,7 @@ app.config['SWAGGER'] = {
     'version': '1.0.0',
     'description': 'API documentation for SCHub',
     'specs_route': '/apidocs/',
-    'host': 'schub-api.jesulayomi.tech',
+    'host': environ.get('HOST', '127.0.0.1:5000'),
     'termsOfService': 'None',
     'contact': '{"Name": "Aina Jesulayomi", "email": "Jesulayomi081@gmail.com"\
 }, {"Name": "Samuel Iwelumo", "email": "micoliser@gmail.com"}'
@@ -89,5 +89,5 @@ if __name__ == '__main__':
     load_dotenv()
     app.run(
         host='0.0.0.0',
-        port=environ.get('DB_DEV_PORT', default='5000'),
+        port=environ.get('DEV_PORT', default='5000'),
         threaded=True)
