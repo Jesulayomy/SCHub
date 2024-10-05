@@ -27,7 +27,9 @@ Clone the repository:
 ```bash
 ~ $ git clone https://github.com/Jesulayomy/SCHub.git
 ~ $ cd SCHub
-/SCHub $
+/SCHub $ python3 -m venv .venv # Create virtual env
+/SCHub $ source .venv/bin/activate # Activate virtual env
+(.venv) /SCHub $ # Keep the virtual env active
 ```
 
 Install Python dependencies with [pip](https://pip.pypa.io/en/stable/), set the environment variables, and mysql database user.
