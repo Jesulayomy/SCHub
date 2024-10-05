@@ -61,4 +61,3 @@ Thank you for your support and collaboration in keeping SCHub secure.
 No issues currently open
 
 ### Closed
-

@@ -30,7 +30,7 @@ Also ensure you are registered for hacktoberfest:
 
 2. Fork the Repository: Start by forking the repository to your GitHub account. Then clone the forked repository to your local machine.
 
-3. Then proceed to make your changes and create a pull request to the hacktoberfest branch `(DO NOT MAKE PRs TO main FOR HACKTOBERFEST)`. 
+3. Then proceed to make your changes and create a pull request to the hacktoberfest branch `(DO NOT MAKE PRs TO main FOR HACKTOBERFEST)`.
 
 ---
 
