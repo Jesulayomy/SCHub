@@ -1,0 +1,16 @@
+name: Greetings
+
+on: [pull_request_target, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "Hello! Thank you for deciding to contribute this issue. Make sure to use the proper tags and Title format so your issue can be easily identified. If you are solving this issue yourself please provide a way to contact you (i.e discord) or you can reach me on [discord](https://discord.com/users/488238079753060353)"
+        pr-message: "Wonderful! Your contribution means a lot. Pleade make sure to include [Hacktoberfest] in the title, and use the keyword 'closed #ISSUE_NUMBER' in the PR description if it should close an issue (All points must have been addressed)"
