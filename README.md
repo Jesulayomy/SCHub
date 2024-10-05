@@ -1,19 +1,19 @@
 ![SCHub](./landing_page/images/SCHub-removebg-preview.png)
 
-![GitHub contributors](https://img.shields.io/github/contributors/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fgithub.com%2Fmicoliser%2FSCHub%2Fcommits%2Fmain) ![GitHub language count](https://img.shields.io/github/languages/count/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub Discussions](https://img.shields.io/github/discussions/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub repo size](https://img.shields.io/github/repo-size/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0)  
----  
+![GitHub contributors](https://img.shields.io/github/contributors/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fgithub.com%2Fmicoliser%2FSCHub%2Fcommits%2Fmain) ![GitHub language count](https://img.shields.io/github/languages/count/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub Discussions](https://img.shields.io/github/discussions/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0) ![GitHub repo size](https://img.shields.io/github/repo-size/micoliser/SCHub?style=for-the-badge&labelColor=%2316161a&color=%237F5AF0)
+---
 ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstatus&query=status&style=for-the-badge&label=API%20status&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstatus) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=courses&style=for-the-badge&label=Courses&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=students&style=for-the-badge&label=Students&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=teachers&style=for-the-badge&label=Teachers&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats) ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats&query=departments&style=for-the-badge&label=Departments&labelColor=%2316161a&color=%237F5AF0&link=https%3A%2F%2Fschub-api.jesulayomi.tech%2Fapi%2Fstats)
 
 ---
 
 ## Introduction
 
-SCHub is a webservice that transforms the manner in which institutions, like universities and colleges, handle data storage for students, teachers, departments and courses in a secure and user-friendly setting. It incorporates technologies like MySQL, Python, ReactJS, Nginx and Haproxy to create a robust tech infrastructure for data access and management.  
-Home: [SCHub](https://schub.jesulayomi.tech/explore)  
-Article: [Blog post](https://www.linkedin.com/pulse/schub-project-jesulayomi-aina)  
-Owners: [Aina Jesulayomi](https://www.linkedin.com/in/jesulayomi/) / [Micoliser](https://www.linkedin.com/in/samuel-iwelumo-8a43a6219/)  
+SCHub is a webservice that transforms the manner in which institutions, like universities and colleges, handle data storage for students, teachers, departments and courses in a secure and user-friendly setting. It incorporates technologies like MySQL, Python, ReactJS, Nginx and Haproxy to create a robust tech infrastructure for data access and management.
+Home: [SCHub](https://schub.jesulayomi.tech/explore)
+Article: [Blog post](https://www.linkedin.com/pulse/schub-project-jesulayomi-aina)
+Owners: [Aina Jesulayomi](https://www.linkedin.com/in/jesulayomi/) / [Micoliser](https://www.linkedin.com/in/samuel-iwelumo-8a43a6219/)
 
-For accessing the web application for testing purposes, please see [Public Access](#public-access)  
+For accessing the web application for testing purposes, please see [Public Access](#public-access)
 
 ---
 To contribute to this repo, please see [Contributing](#contributing), [Code of Conduct](CODE_OF_CONDUCT.md), Issues and the Discussions page.
@@ -30,10 +30,16 @@ Clone the repository:
 /SCHub $
 ```
 
-Install Python dependencies with [pip](https://pip.pypa.io/en/stable/).
+Install Python dependencies with [pip](https://pip.pypa.io/en/stable/), set the environment variables, and mysql database user.
 
 ```bash
 /SCHub $ pip install -r configurations/requirements.txt
+/SCHub $ pre-commit install
+/SCHub $ cp configurations/environment .env
+/SCHub $ vi .env # Use as a guide
+...
+/SCHub $ mysql -u root -p # Setup mysql user
+...
 ```
 
 Install react dependencies with [npm](https://www.npmjs.com/).
@@ -141,7 +147,7 @@ You can use the following login details to access the site:
 
 ## Contributing
 
-Pull requests are welcome, but please contact us first. For major changes, please open an issue first to discuss what you would like to change.  
+Pull requests are welcome, but please contact us first. For major changes, please open an issue first to discuss what you would like to change.
 Ensure to read the [contribution](CONTRIBUTING.md) and [conduct](CODE_OF_CONDUCT.md) pages.
 Please make sure to update tests as appropriate and document changes properly.
 

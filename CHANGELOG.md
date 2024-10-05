@@ -8,10 +8,10 @@ All notable changes to this project will be documented in this file. Include you
 PR Title: [Hacktoberfest] [Code Formatting] Changed all eggs to omelettes.
 
 Summary: Changed all eggs to omelettes in the codebase to make it more readable and consistent.
- 
+
 ### Added
 - Feature foo
- 
+
 ### Changed
 - eggs to omelettes
 

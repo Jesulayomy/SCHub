@@ -5,7 +5,7 @@ import App from './components/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // Wrapping the app with AuthProvider for authentication context 
+  // Wrapping the app with AuthProvider for authentication context
   <React.StrictMode>
     <AuthProvider>
       <App />

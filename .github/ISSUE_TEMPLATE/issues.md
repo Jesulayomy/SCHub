@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-I want to . . . 
+I want to . . .
 - Implement a feature
 - Solve a security issue on api
 - Add code checking to Github actions

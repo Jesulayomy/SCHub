@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """
-    This module contains the person class for
-    creating staffs and student
+This module contains the person class for
+creating staffs and student
 """
+
 from email_validator import validate_email
 from flask_login import UserMixin
 from hashlib import md5
@@ -10,7 +11,7 @@ from sqlalchemy import Column, String
 
 
 class Person(UserMixin):
-    """ The person class for creating staffs and student classes """
+    """The person class for creating staffs and student classes"""
 
     first_name = Column(String(45), nullable=False)
     last_name = Column(String(45), nullable=False)
@@ -20,7 +21,7 @@ class Person(UserMixin):
     recovery_answer = Column(String(50), nullable=True)
 
     def __setattr__(self, name, value):
-        """ hashes the password to an md5 when set """
+        """hashes the password to an md5 when set"""
 
         if name == "first_name":
             if not value.isalpha():

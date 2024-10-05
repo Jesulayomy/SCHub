@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" This module contains the base model people classes """
+"""This module contains the base model people classes"""
+
 from datetime import datetime
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.orm import declarative_base
@@ -10,19 +11,14 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """ The base class for creating other classes """
+    """The base class for creating other classes"""
 
-    id = Column(String(40),
-                primary_key=True,
-                nullable=False,
-                unique=True)
+    id = Column(String(40), primary_key=True, nullable=False, unique=True)
 
-    created_at = Column(DateTime,
-                        default=datetime.utcnow(),
-                        nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, **kwargs):
-        """ initializes object """
+        """initializes object"""
 
         if kwargs:
             for key, value in kwargs.items():
@@ -33,7 +29,7 @@ class BaseModel:
         self.created_at = datetime.utcnow()
 
     def to_dict(self):
-        """ returns a dictionary representation of the object """
+        """returns a dictionary representation of the object"""
 
         self_dict = self.__dict__.copy()
         for key, value in self_dict.items():

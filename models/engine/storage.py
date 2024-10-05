@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" This module contains the class for storage """
+"""This module contains the class for storage"""
 
 from contextlib import contextmanager
 from dotenv.main import load_dotenv
@@ -19,12 +19,12 @@ load_dotenv()
 
 
 class Storage:
-    """ database storage class """
+    """database storage class"""
 
     __engine = None
 
     def __init__(self):
-        """ initializes self """
+        """initializes self"""
 
         dialect = "mysql"
         driver = "mysqlconnector"
@@ -42,29 +42,32 @@ class Storage:
             password = environ["DB_DEV_PASSWORD"]
             db = environ["DB_DEV_DB"]
 
-        self.__engine = create_engine("{}+{}://{}:{}@{}/{}".format(
-                                      dialect, driver, user,
-                                      password, host, db),
-                                      pool_pre_ping=True,
-                                      poolclass=QueuePool,
-                                      pool_size=10)
-        self.session_factory = sessionmaker(bind=self.__engine,
-                                            expire_on_commit=False)
+        self.__engine = create_engine(
+            "{}+{}://{}:{}@{}/{}".format(
+                dialect, driver, user, password, host, db
+            ),
+            pool_pre_ping=True,
+            poolclass=QueuePool,
+            pool_size=10,
+        )
+        self.session_factory = sessionmaker(
+            bind=self.__engine, expire_on_commit=False
+        )
         self.Session = scoped_session(self.session_factory)
 
         if is_test:
             Base.metadata.drop_all(self.__engine)
 
     def reload(self):
-        """ Reloads the session and create tables """
+        """Reloads the session and create tables"""
 
         Base.metadata.create_all(self.__engine)
 
     @contextmanager
     def session_scope(self):
         """
-            Creates a session, and tearsDown after control
-            is transferred back
+        Creates a session, and tearsDown after control
+        is transferred back
         """
 
         session = self.Session()
@@ -78,7 +81,7 @@ class Storage:
             session.close()
 
     def all(self, cls=None):
-        """ gets all objects """
+        """gets all objects"""
 
         objects = {}
         if cls:
@@ -100,7 +103,7 @@ class Storage:
         return objects
 
     def get(self, cls, id):
-        """ gets a particular object """
+        """gets a particular object"""
 
         if type(cls) is str:
             cls = eval(cls)
@@ -114,29 +117,29 @@ class Storage:
         return obj
 
     def count(self, cls=None):
-        """ Returns the number of objects of a class """
+        """Returns the number of objects of a class"""
 
         return len(self.all(cls))
 
     def new(self, obj):
-        """ Adds an object to the current session """
+        """Adds an object to the current session"""
 
         with self.session_scope() as session:
             session.add(obj)
 
     def save(self):
-        """ commits the current session """
+        """commits the current session"""
 
         with self.session_scope() as session:
             session.commit()
 
     def delete(self, obj):
-        """ deletes an object from the current session """
+        """deletes an object from the current session"""
 
         with self.session_scope() as session:
             session.delete(obj)
 
     def close(self):
-        """ removes the current session """
+        """removes the current session"""
 
         self.Session.remove()

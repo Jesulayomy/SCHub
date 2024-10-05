@@ -7,3 +7,4 @@ DB_TEST_USER = schub_test
 DB_TEST_PASSWORD = {PASSWORD}
 DB_TEST_DB = schub_test_db
 SECRET_KEY = {SECRET_KEY}
+HOST = {schub.example.com OR localhost:8000}
