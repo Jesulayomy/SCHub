@@ -1,13 +1,17 @@
 attrs==23.2.0
 blinker==1.8.2
+cfgv==3.4.0
 click==8.1.7
+distlib==0.3.8
 dnspython==2.6.1
 email-validator==2.0.0.post2
+filelock==3.16.1
 flasgger==0.9.7.1
 Flask==2.3.2
 Flask-Cors==3.0.10
 Flask-Login==0.6.2
 gunicorn==20.1.0
+identify==2.6.1
 idna==3.7
 itsdangerous==2.2.0
 Jinja2==3.1.4
@@ -17,10 +21,13 @@ MarkupSafe==2.1.5
 mistune==3.0.2
 mysql-connector-python==9.0.0
 mysqlclient==2.2.4
+nodeenv==1.9.1
 numpy==2.0.0
 packaging==24.1
 pandas==2.0.2
 pep8==1.7.1
+platformdirs==4.3.6
+pre-commit==3.8.0
 PyJWT==2.7.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
@@ -33,4 +40,5 @@ six==1.16.0
 SQLAlchemy==2.0.9
 typing_extensions==4.12.2
 tzdata==2024.1
+virtualenv==20.26.6
 Werkzeug==2.3.3
