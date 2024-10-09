@@ -42,22 +42,22 @@ function Home() {
           interface or API.
         </p>
         <div className='buttons'>
-          <a href='https://www.schub.me/apidocs' className='button'>
+          <a href='https://www.schub.me/apidocs' className='button' id='button_documentation'>
             Documentation
           </a>
-          <a href='https://github.com/micoliser/SCHub' className='button'>
+          <a href='https://github.com/micoliser/SCHub' className='button' id='button_repository'>
             Repository
           </a>
-          <a href='https://github.com/micoliser/SCHub' className='button'>
+          <a href='https://github.com/micoliser/SCHub' className='button' id='button_authors'>
             Authors
           </a>
           <a
             href='https://www.linkedin.com/pulse/schub-project-jesulayomi-aina'
-            className='button'
+            className='button' id='button_blogPost'
           >
             Blogpost
           </a>
-          <a href='https://www.schub.me/explore/#about' className='button'>
+          <a href='https://www.schub.me/explore/#about' className='button' id='button_profiles'>
             Profiles
           </a>
         </div>

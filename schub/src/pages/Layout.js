@@ -26,7 +26,7 @@ function Layout() {
 
   return (
     <>
-      <header>
+      <header >
         <Link to='/' className='head' onClick={() => setIsLoggingIn(false)}>
           SCHub
         </Link>
@@ -46,7 +46,8 @@ function Layout() {
           ) : (
             <Link
               to='/login'
-              className='sign'
+              className='sign' 
+              id='homepage_login'
               onClick={() => setIsLoggingIn(true)}
             >
               Login
