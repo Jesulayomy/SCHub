@@ -2,15 +2,14 @@ Admin API
 ---
 tags:
   - Admins
-parameters:
-  - name: admin_id
-    in: path
-    type: string
-    required: true
-    description: The ID of the admin to retrieve, update, or delete
-
 get:
   summary: Retrieves an admin from the database
+  parameters:
+    - name: admin_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the admin to retrieve
   responses:
     200:
       description: Request returned successfully
@@ -30,17 +29,31 @@ get:
 
 put:
   summary: Updates an existing admin
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: '#/components/schemas/AdminUpdate'
-        example:
-          first_name: "Aina"
-          last_name: "Jesulayomi"
-          email: "aina.jesulayomi@schub.com"
-          recovery_question: "What is your favorite color?"
+  parameters:
+    - name: admin_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the admin to update
+    - in: body
+      name: admin_body
+      description: The body of the admin to update
+      schema:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: Admin's first name
+          last_name:
+            type: string
+            description: Admin's last name
+          email:
+            type: string
+            format: email
+            description: Admin's email address
+          recovery_question:
+            type: string
+            description: Admin's password recovery question
   responses:
     200:
       description: Admin updated successfully
@@ -62,6 +75,12 @@ put:
 
 delete:
   summary: Deletes an admin
+  parameters:
+    - name: admin_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the admin to delete
   responses:
     200:
       description: Admin deleted successfully
@@ -99,19 +118,3 @@ components:
         last_name:
           type: string
           description: Admin's last name
-    AdminUpdate:
-      type: object
-      properties:
-        first_name:
-          type: string
-          description: Admin's first name
-        last_name:
-          type: string
-          description: Admin's last name
-        email:
-          type: string
-          format: email
-          description: Admin's email address
-        recovery_question:
-          type: string
-          description: Admin's password recovery question

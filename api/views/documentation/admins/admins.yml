@@ -37,17 +37,29 @@ get:
 
 post:
   summary: Creates a new admin
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: '#/components/schemas/AdminCreate'
-        example:
-          first_name: "John"
-          last_name: "Doe"
-          email: "john.doe@example.com"
-          password: "securepassword123"
+  parameters:
+    - name: first_name
+      in: formData
+      required: true
+      type: string
+      description: Admin's first name
+    - name: last_name
+      in: formData
+      required: true
+      type: string
+      description: Admin's last name
+    - name: email
+      in: formData
+      required: true
+      type: string
+      format: email
+      description: Admin's email address
+    - name: password
+      in: formData
+      required: true
+      type: string
+      format: password
+      description: Admin's password
   responses:
     201:
       description: Admin created successfully
@@ -63,7 +75,7 @@ post:
             last_name: "Doe"
             recovery_question: "What is your mother's maiden name?"
     400:
-      description: Bad request (missing required fields or invalid JSON)
+      description: Bad request (missing required fields or invalid data)
 
 components:
   schemas:
@@ -91,25 +103,3 @@ components:
         last_name:
           type: string
           description: Admin's last name
-    AdminCreate:
-      type: object
-      required:
-        - first_name
-        - last_name
-        - email
-        - password
-      properties:
-        first_name:
-          type: string
-          description: Admin's first name
-        last_name:
-          type: string
-          description: Admin's last name
-        email:
-          type: string
-          format: email
-          description: Admin's email address
-        password:
-          type: string
-          format: password
-          description: Admin's password
