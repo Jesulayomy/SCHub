@@ -2,15 +2,15 @@ Student API
 ---
 tags:
   - Students
-parameters:
-  - name: student_id
-    in: path
-    type: string
-    required: true
-    description: The ID of the student to retrieve, update, or delete
 
 get:
   summary: Retrieves a student from the database
+  parameters:
+    - name: student_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the student to retrieve
   responses:
     200:
       description: Request returned successfully
@@ -18,17 +18,56 @@ get:
         application/json:
           schema:
             $ref: '#/components/schemas/Student'
+          example:
+            created_at: "2023-04-15T10:30:00Z"
+            id: "53af4926-52ee-41d0-9acc-ae7230000001"
+            first_name: "John"
+            last_name: "Doe"
+            age: 20
+            matric_no: "2023/001"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            department: "Computer Science"
+            start_level: 100
+            current_level: 200
+            email: "john.doe@example.com"
     404:
       description: Student with the specified ID does not exist
-
 put:
-  summary: Updates an existing student
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: '#/components/schemas/StudentUpdate'
+  summary: Updates a student record using Student ID
+  parameters:
+    - name: student_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the student to update
+    - in: body
+      name: student_body
+      description: The body of the student to update
+      schema:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: Student's first name
+          last_name:
+            type: string
+            description: Student's last name
+          age:
+            type: integer
+            description: Student's age
+          matric_no:
+            type: string
+            description: Student's matriculation number
+          current_level:
+            type: integer
+            description: Student's current academic level
+          email:
+            type: string
+            format: email
+            description: Student's email address
+          department_id:
+            type: string
+            format: uuid
   responses:
     200:
       description: Student updated successfully
@@ -36,13 +75,32 @@ put:
         application/json:
           schema:
             $ref: '#/components/schemas/Student'
+          example:
+            created_at: "2023-04-15T10:30:00Z"
+            id: "53af4926-52ee-41d0-9acc-ae7230000001"
+            first_name: "John"
+            last_name: "Doe"
+            age: 20
+            matric_no: "2023/001"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            department: "Computer Science"
+            start_level: 100
+            current_level: 200
+            email: "john.doe@example.com"
     400:
-      description: Bad request (invalid JSON)
+      description: Invalid request body
     404:
       description: Student with the specified ID does not exist
+  
 
 delete:
   summary: Deletes a student
+  parameters:
+    - name: student_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the student to delete
   responses:
     200:
       description: Student deleted successfully
@@ -89,28 +147,6 @@ components:
         start_level:
           type: integer
           description: Student's starting academic level
-        current_level:
-          type: integer
-          description: Student's current academic level
-        email:
-          type: string
-          format: email
-          description: Student's email address
-    StudentUpdate:
-      type: object
-      properties:
-        first_name:
-          type: string
-          description: Student's first name
-        last_name:
-          type: string
-          description: Student's last name
-        age:
-          type: integer
-          description: Student's age
-        matric_no:
-          type: string
-          description: Student's matriculation number
         current_level:
           type: integer
           description: Student's current academic level

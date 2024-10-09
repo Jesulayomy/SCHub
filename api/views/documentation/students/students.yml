@@ -39,12 +39,57 @@ get:
 
 post:
   summary: Creates a new student
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: '#/components/schemas/StudentCreate'
+  parameters:
+    - name: first_name
+      in: body
+      required: true
+      schema:
+        type: string
+      description: Student's first name
+    - name: last_name
+      in: body
+      required: true
+      schema:
+        type: string
+      description: Student's last name
+    - name: age
+      in: body
+      required: true
+      schema:
+        type: integer
+      description: Student's age
+    - name: matric_no
+      in: body
+      required: true
+      schema:
+        type: string
+      description: Student's matriculation number
+    - name: department_id
+      in: body
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: The UUID of the student's department
+    - name: start_level
+      in: body
+      required: true
+      schema:
+        type: integer
+      description: Student's starting academic level
+    - name: current_level
+      in: body
+      required: true
+      schema:
+        type: integer
+      description: Student's current academic level
+    - name: email
+      in: body
+      required: true
+      schema:
+        type: string
+        format: email
+      description: Student's email address
   responses:
     201:
       description: Student created successfully
@@ -53,7 +98,7 @@ post:
           schema:
             $ref: '#/components/schemas/Student'
     400:
-      description: Bad request (missing required fields or invalid JSON)
+      description: Bad request (missing required fields or invalid parameters)
 
 components:
   schemas:
@@ -87,44 +132,6 @@ components:
         department:
           type: string
           description: Name of the student's department
-        start_level:
-          type: integer
-          description: Student's starting academic level
-        current_level:
-          type: integer
-          description: Student's current academic level
-        email:
-          type: string
-          format: email
-          description: Student's email address
-    StudentCreate:
-      type: object
-      required:
-        - first_name
-        - last_name
-        - age
-        - matric_no
-        - department_id
-        - start_level
-        - current_level
-        - email
-      properties:
-        first_name:
-          type: string
-          description: Student's first name
-        last_name:
-          type: string
-          description: Student's last name
-        age:
-          type: integer
-          description: Student's age
-        matric_no:
-          type: string
-          description: Student's matriculation number
-        department_id:
-          type: string
-          format: uuid
-          description: The UUID of the student's department
         start_level:
           type: integer
           description: Student's starting academic level
