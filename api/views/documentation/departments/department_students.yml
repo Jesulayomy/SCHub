@@ -1,82 +1,90 @@
-Retrieves all students in a specific department
+Department Students API
 ---
 tags:
   - Departments
 parameters:
   - name: department_id
     in: path
-    description: The ID of the department
+    type: string
     required: true
-    schema:
-      type: string
-responses:
-  200:
-    description: "Request returned successfully"
-    content:
-      application/json:
-        schema:
-          type: array
-          items:
-            type: object
-            properties:
-              age:
-                type: integer
-                description: Student's age
-              created_at:
-                type: string
-                description: Time of creation of the Student
-              current_level:
-                type: integer
-                description: Student's current level
-              department:
-                type: string
-                description: Student's department
-              department_id:
-                type: string
-                description: The UUID of the Student's department
-              email:
-                type: string
-                description: Student's email
-              first_name:
-                type: string
-                description: Student's first name
-              id:
-                type: string
-                description: The UUID of the Student
-              last_name:
-                type: string
-                description: Student's last name
-              matric_no:
-                type: string
-                description: Student's matriculation number
-              recovery_question:
-                type: string
-                description: Student's password recovery question
-              start_level:
-                type: integer
-                description: Student's starting level
-        example:
-          - age: 23
-            created_at: "2017-03-25T02:17:06"
-            current_level: 100
-            department: "Aerospace Engineering"
-            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
-            email: "KRAGGK@schub.com"
-            first_name: "KRAGG"
-            id: "53af4926-52ee-41d0-9acc-ae7230200001"
-            last_name: "KELSEY"
-            matric_no: "202210001KK"
-            recovery_question: "What is your mother's maiden name?"
-            start_level: 100
-          - age: 24
-            created_at: "2017-03-25T02:17:06"
-            current_level: 100
-            department: "Aerospace Engineering"
-            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
-            email: "SULIMANN@schub.com"
-            first_name: "SULIMAN"
-            id: "53af4926-52ee-41d0-9acc-ae7230200002"
-            last_name: "NICKHOLAS"
-            matric_no: "202210002SN"
-            recovery_question: "What is your mother's maiden name?"
-            start_level: 100
+    description: The ID of the department to retrieve students for
+
+get:
+  summary: Retrieves all students for a specific department
+  responses:
+    200:
+      description: Request returned successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/StudentWithDepartment'
+          example:
+            - id: "53af4926-52ee-41d0-9acc-ae7230000001"
+              first_name: "AINA"
+              last_name: "JESULAYOMI"
+              age: 20
+              matric_no: "2023/001"
+              department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+              department: "Agricultural Engineering"
+              start_level: 100
+              current_level: 200
+              email: "aina.jesulayomi@example.com"
+              created_at: "2017-03-25T02:17:06"
+            - id: "53af4926-52ee-41d0-9acc-ae7230000002"
+              first_name: "JOHN"
+              last_name: "DOE"
+              age: 21
+              matric_no: "2023/002"
+              department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+              department: "Agricultural Engineering"
+              start_level: 100
+              current_level: 200
+              email: "john.doe@example.com"
+              created_at: "2017-03-25T02:17:06"
+    404:
+      description: Department with the specified ID does not exist
+
+components:
+  schemas:
+    StudentWithDepartment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the student
+        first_name:
+          type: string
+          description: Student's first name
+        last_name:
+          type: string
+          description: Student's last name
+        age:
+          type: integer
+          description: Student's age
+        matric_no:
+          type: string
+          description: Student's matriculation number
+        department_id:
+          type: string
+          format: uuid
+          description: The UUID of the student's department
+        department:
+          type: string
+          description: Name of the student's department
+        start_level:
+          type: integer
+          description: Student's starting academic level
+        current_level:
+          type: integer
+          description: Student's current academic level
+        email:
+          type: string
+          format: email
+          description: Student's email address
+        created_at:
+          type: string
+          format: date-time
+          description: Time of creation of the student record
