@@ -80,6 +80,11 @@
 
 .login-student, .login-teacher, .login-admin {
     background-repeat: no-repeat;
+    transition: transform 0.3s ease;
+}
+
+.login-student:hover, .login-teacher:hover, .login-admin:hover{
+    transform: scale(1.03);
 }
 
 /* Media queries for responsive */
