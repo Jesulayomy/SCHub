@@ -26,12 +26,12 @@ class Department(models.Model):
         max_length=60,
         unique=True,
     )
-    teacher = models.ForeignKey(
+    head = models.ForeignKey(
         Teacher,
         on_delete=models.SET_NULL,
-        # related_name='departments',
+        related_name="departments",
         null=True,
-        blank=True,
+        default=None,
     )
 
     class Meta:
@@ -69,16 +69,16 @@ class Course(models.Model):
     department = models.ForeignKey(
         Department,
         on_delete=models.SET_NULL,
-        # related_name='department_courses',
+        related_name="courses",
         null=True,
-        blank=True,
+        default=None,
     )
     teacher = models.ForeignKey(
         Teacher,
         on_delete=models.SET_NULL,
-        # related_name='teacher_courses',
+        related_name="courses",
         null=True,
-        blank=True,
+        default=None,
     )
 
     class Meta:

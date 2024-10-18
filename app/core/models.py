@@ -193,7 +193,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         """String representation of the user"""
-        return self.email
+        return f"{self.last_name} {self.first_name} - {self.email}"
 
 
 class Student(models.Model):
@@ -237,6 +237,9 @@ class Student(models.Model):
         verbose_name = _("student")
         verbose_name_plural = _("students")
 
+    def __str__(self):
+        return f"{self.user}"
+
 
 class Teacher(models.Model):
     """Teacher model"""
@@ -256,6 +259,9 @@ class Teacher(models.Model):
 
         verbose_name = _("teacher")
         verbose_name_plural = _("teachers")
+
+    def __str__(self):
+        return f"{self.user}"
 
 
 class Parent(models.Model):
@@ -282,6 +288,9 @@ class Parent(models.Model):
 
         verbose_name = _("parent")
         verbose_name_plural = _("parents")
+
+    def __str__(self):
+        return f"{self.user}"
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

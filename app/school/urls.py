@@ -22,4 +22,9 @@ urlpatterns = [
         views.DepartmentDetail.as_view(),
         name="department_detail",
     ),
+    path(
+        "departments/<str:pk>/courses/",
+        views.DepartmentCourseDetail.as_view(),
+        name="department_courses",
+    ),
 ]

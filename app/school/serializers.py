@@ -28,7 +28,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "teacher",
+            "head",
             "created",
             "updated",
         ]
@@ -44,7 +44,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         """Update an existing department"""
         instance.name = validated_data.get("name", instance.name)
-        instance.teacher = validated_data.get("teacher", instance.teacher)
+        instance.head = validated_data.get("head", instance.teacher)
         instance.save()
         return instance
 
@@ -60,11 +60,13 @@ class CourseSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "department",
+            "teacher",
             "created",
             "updated",
         ]
         extra_kwargs = {
             "id": {"read_only": True},
+            "name": {"required": False},
         }
 
     def create(self, validated_data):
@@ -78,5 +80,28 @@ class CourseSerializer(serializers.ModelSerializer):
         instance.department = validated_data.get(
             "department", instance.department
         )
+        instance.teacher = validated_data.get("teacher", instance.teacher)
         instance.save()
         return instance
+
+
+class DepartmentCourseSerializer(serializers.ModelSerializer):
+    """Serializes the Department model with its courses"""
+
+    courses = CourseSerializer(many=True, read_only=True)
+
+    class Meta:
+        """Meta class for the department serializer"""
+
+        model = Department
+        fields = [
+            "id",
+            "name",
+            "head",
+            "courses",
+            "created",
+            "updated",
+        ]
+        extra_kwargs = {
+            "id": {"read_only": True},
+        }

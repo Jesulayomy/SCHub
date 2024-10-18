@@ -41,7 +41,7 @@ from core.models import (
 from core.permissions import (
     NoAuth,
     # CanCreate,
-    IsOwnerOrAdminOrReadOnly,
+    # IsOwnerOrAdminOrReadOnly,
     # IsStaff,
     # IsDriverOrAdminOrReadOnly,
     # IsPassengerOrAdminOrReadOnly,
@@ -50,6 +50,7 @@ from core.serializers import (
     ParentSerializer,
     StudentSerializer,
     TeacherSerializer,
+    TeacherCourseSerializer,
     UserSerializer,
     UserTokenObtainPairSerializer,
 )
@@ -106,11 +107,21 @@ class UserList(ListCreateAPIView):
         data["users"] = data.pop("results")
         return response
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        data = {"detail": "User created successfully", "user": serializer.data}
+        return Response(data, status=status.HTTP_201_CREATED)
+
 
 class UserDetail(APIView):
     """User retrieve, update and delete"""
 
-    permission_classes = [IsOwnerOrAdminOrReadOnly]
+    authentication_classes = [NoAuth, JWTAuthentication]
+    permission_classes = []
+    serializer_class = UserSerializer
 
     def get(self, request, pk):
         """Retrieve a user"""
@@ -185,11 +196,24 @@ class StudentList(ListCreateAPIView):
         data["students"] = data.pop("results")
         return response
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        data = {
+            "detail": "Student created successfully",
+            "student": serializer.data,
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
+
 
 class StudentDetail(APIView):
     """Student retrieve, update and delete"""
 
-    permission_classes = [IsOwnerOrAdminOrReadOnly]
+    permission_classes = []
+    authentication_classes = [NoAuth, JWTAuthentication]
+    serializer_class = StudentSerializer
 
     def get(self, request, pk):
         """Retrieve a student"""
@@ -265,6 +289,17 @@ class TeacherList(ListCreateAPIView):
         data["teachers"] = data.pop("results")
         return response
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        data = {
+            "detail": "Teacher created successfully",
+            "teacher": serializer.data,
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
+
 
 class TeacherDetail(RetrieveUpdateDestroyAPIView):
     """Teacher retrieve, update and delete"""
@@ -329,6 +364,28 @@ class TeacherDetail(RetrieveUpdateDestroyAPIView):
         )
 
 
+class TeacherCourses(APIView):
+    """List courses for a teacher"""
+
+    serializer_class = TeacherCourseSerializer
+    authentication_classes = [NoAuth, JWTAuthentication]
+    permission_classes = []
+
+    def get(self, request, pk):
+        try:
+            teacher = Teacher.objects.get(pk=pk)
+        except Teacher.DoesNotExist:
+            return Response(
+                {"detail": "Teacher not found", "teacher": None},
+                status.HTTP_404_NOT_FOUND,
+            )
+        serialized = TeacherCourseSerializer(teacher)
+        return Response(
+            {"detail": "Teacher fetched", "teacher": serialized.data},
+            status.HTTP_200_OK,
+        )
+
+
 class ParentList(ListCreateAPIView):
     """List and create new parents"""
 
@@ -347,11 +404,24 @@ class ParentList(ListCreateAPIView):
         data["parents"] = data.pop("results")
         return response
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        data = {
+            "detail": "Teacher created successfully",
+            "teacher": serializer.data,
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
+
 
 class ParentDetail(APIView):
     """Parent retrieve, update and delete"""
 
-    permission_classes = [IsOwnerOrAdminOrReadOnly]
+    permission_classes = []
+    authentication_classes = [NoAuth, JWTAuthentication]
+    serializer_class = ParentSerializer
 
     def get(self, request, pk):
         """Retrieve a parent"""

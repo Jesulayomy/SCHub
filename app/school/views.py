@@ -6,6 +6,7 @@ from rest_framework.decorators import (
 from rest_framework.generics import (
     # GenericAPIView,
     # ListAPIView,
+    # RetrieveAPIView,
     ListCreateAPIView,
 )
 from rest_framework.pagination import PageNumberPagination
@@ -30,6 +31,7 @@ from school.models import (
 from school.serializers import (
     DepartmentSerializer,
     CourseSerializer,
+    DepartmentCourseSerializer,
 )
 
 
@@ -64,12 +66,22 @@ class DepartmentList(ListCreateAPIView):
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         data = response.data
-        print(data)
         data["detail"] = "Departments fetched successfully"
         data["next"] = self.paginator.get_next_link()
         data["previous"] = self.paginator.get_previous_link()
         data["departments"] = data.pop("results")
         return response
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        data = {
+            "detail": "Course created successfully",
+            "course": serializer.data,
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
 
 
 class DepartmentDetail(APIView):
@@ -77,6 +89,7 @@ class DepartmentDetail(APIView):
 
     authentication_classes = [NoAuth, JWTAuthentication]
     permission_classes = []
+    serializer_class = DepartmentSerializer
 
     def get(self, request, pk):
         """Retrieve a department instance"""
@@ -152,12 +165,22 @@ class CourseList(ListCreateAPIView):
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         data = response.data
-        print(data)
         data["detail"] = "Courses fetched successfully"
         data["next"] = self.paginator.get_next_link()
         data["previous"] = self.paginator.get_previous_link()
         data["courses"] = data.pop("results")
         return response
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        data = {
+            "detail": "Course created successfully",
+            "course": serializer.data,
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
 
 
 class CourseDetail(APIView):
@@ -165,6 +188,7 @@ class CourseDetail(APIView):
 
     authentication_classes = [NoAuth, JWTAuthentication]
     permission_classes = []
+    serializer_class = CourseSerializer
 
     def get(self, request, pk):
         """Retrieve a course instance"""
@@ -225,4 +249,30 @@ class CourseDetail(APIView):
         return Response(
             {"detail": "Course deleted successfully", "course": None},
             status=status.HTTP_202_ACCEPTED,
+        )
+
+
+class DepartmentCourseDetail(APIView):
+    """Retrieve a department instance using DepartmentCourseSerializer"""
+
+    authentication_classes = [NoAuth, JWTAuthentication]
+    permission_classes = []
+    serializer_class = DepartmentCourseSerializer
+
+    def get(self, request, pk):
+        """Retrieve a department instance"""
+        try:
+            department = Department.objects.get(pk=pk)
+        except Department.DoesNotExist:
+            return Response(
+                {"detail": "Department not found", "department": None},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        serialized = DepartmentCourseSerializer(department)
+        return Response(
+            {
+                "detail": "Department retrieved successfully",
+                "department": serialized.data,
+            },
+            status=status.HTTP_200_OK,
         )

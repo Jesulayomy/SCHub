@@ -4,17 +4,13 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 # from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import (
+from core.models import (
     User,
     Student,
     Teacher,
     Parent,
 )
-
-# from school.models import (
-#     # Department,
-#     # Course,
-# )
+from school.serializers import CourseSerializer
 
 
 class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -188,3 +184,26 @@ class ParentSerializer(serializers.ModelSerializer):
         instance.kids.add(validated_data.get("kids", None))
         instance.save()
         return instance
+
+
+class TeacherCourseSerializer(serializers.ModelSerializer):
+    """Helper class to serialize Teacher objects
+    Serializers must be checked with .is_valid() before saving
+    """
+
+    courses = CourseSerializer(many=True, read_only=True)
+
+    class Meta:
+        """Meta class for the student serializer"""
+
+        model = Teacher
+        fields = [
+            "id",
+            "user",
+            "courses",
+            "created",
+            "updated",
+        ]
+        extra_kwargs = {
+            "id": {"read_only": True},
+        }
