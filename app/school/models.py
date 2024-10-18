@@ -13,11 +13,11 @@ class Department(models.Model):
     id = models.UUIDField(
         _("ID"), primary_key=True, default=uuid4, editable=False
     )
-    created_at = models.DateTimeField(
+    created = models.DateTimeField(
         _("created at"),
         auto_now_add=True,
     )
-    updated_at = models.DateTimeField(
+    updated = models.DateTimeField(
         _("updated at"),
         auto_now=True,
     )
@@ -53,11 +53,11 @@ class Course(models.Model):
         default=uuid4,
         editable=False,
     )
-    created_at = models.DateTimeField(
+    created = models.DateTimeField(
         _("created at"),
         auto_now_add=True,
     )
-    updated_at = models.DateTimeField(
+    updated = models.DateTimeField(
         _("updated at"),
         auto_now=True,
     )

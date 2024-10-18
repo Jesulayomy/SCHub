@@ -21,6 +21,7 @@ from rest_framework.generics import (
     # GenericAPIView,
     # ListAPIView,
     ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.pagination import PageNumberPagination
 
@@ -59,9 +60,7 @@ from core.serializers import (
 @permission_classes([])
 def api_status(request):
     """Returns True if api is up"""
-    return Response(
-        {"detail": "API is up and running!", "data": {"status": True}}
-    )
+    return Response({"detail": "API is up and running!", "status": True})
 
 
 @api_view(["GET"])
@@ -75,12 +74,13 @@ def user_stats(request):
     return Response(
         {
             "detail": "User stats",
-            "data": {
+            "stats": {
                 "teachers": tcount,
                 "students": scount,
                 "parents": pcount,
             },
-        }
+        },
+        status=status.HTTP_200_OK,
     )
 
 
@@ -91,11 +91,20 @@ class UserTokenObtainPairView(TokenObtainPairView):
 class UserList(ListCreateAPIView):
     """List and Create a new user"""
 
-    queryset = User.objects.all().order_by("created")
+    queryset = User.objects.all().order_by("-created")
     serializer_class = UserSerializer
     pagination_class = PageNumberPagination
     authentication_classes = [NoAuth, JWTAuthentication]
     permission_classes = []
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        data = response.data
+        data["detail"] = "Users fetched successfully"
+        data["next"] = self.paginator.get_next_link()
+        data["previous"] = self.paginator.get_previous_link()
+        data["users"] = data.pop("results")
+        return response
 
 
 class UserDetail(APIView):
@@ -108,7 +117,10 @@ class UserDetail(APIView):
         try:
             user = User.objects.get(pk=pk)
         except User.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "User not found", "user": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         serialized = UserSerializer(user)
         return Response(
             {"detail": "User Fetched", "user": serialized.data},
@@ -120,7 +132,10 @@ class UserDetail(APIView):
         try:
             user = User.objects.get(pk=pk)
         except User.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "User not found", "user": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         data = request.data
         serialized = UserSerializer(user, data=data, partial=True)
         if serialized.is_valid():
@@ -129,25 +144,46 @@ class UserDetail(APIView):
                 {"detail": "User Updated", "user": serialized.data},
                 status.HTTP_202_ACCEPTED,
             )
-        return Response(serialized.errors, status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {
+                "errors": serialized.errors,
+                "detail": "An error occured",
+                "user": None,
+            },
+            status.HTTP_400_BAD_REQUEST,
+        )
 
     def delete(self, request, pk):
         try:
             user = User.objects.get(pk=pk)
         except User.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "User not found", "user": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         user.delete()
-        return Response({}, status.HTTP_202_ACCEPTED)
+        return Response(
+            {"detail": "User deleted", "user": None}, status.HTTP_202_ACCEPTED
+        )
 
 
 class StudentList(ListCreateAPIView):
     """List and create new students"""
 
-    queryset = Student.objects.all().order_by("created")
+    queryset = Student.objects.all().order_by("-created")
     serializer_class = StudentSerializer
     pagination_class = PageNumberPagination
     authentication_classes = [NoAuth, JWTAuthentication]
     permission_classes = []
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        data = response.data
+        data["detail"] = "Students fetched successfully"
+        data["next"] = self.paginator.get_next_link()
+        data["previous"] = self.paginator.get_previous_link()
+        data["students"] = data.pop("results")
+        return response
 
 
 class StudentDetail(APIView):
@@ -160,7 +196,10 @@ class StudentDetail(APIView):
         try:
             student = Student.objects.get(pk=pk)
         except Student.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Student not found", "student": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         serialized = StudentSerializer(student)
         return Response(
             {"detail": "Student Fetched", "student": serialized.data},
@@ -172,7 +211,10 @@ class StudentDetail(APIView):
         try:
             student = Student.objects.get(pk=pk)
         except Student.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Student not found", "student": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         data = request.data
         serialized = StudentSerializer(student, data=data, partial=True)
         if serialized.is_valid():
@@ -181,38 +223,65 @@ class StudentDetail(APIView):
                 {"detail": "Student Updated", "student": serialized.data},
                 status.HTTP_202_ACCEPTED,
             )
-        return Response(serialized.errors, status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {
+                "errors": serialized.errors,
+                "detail": "An error occured",
+                "student": None,
+            },
+            status.HTTP_400_BAD_REQUEST,
+        )
 
     def delete(self, request, pk):
         try:
             teacher = Teacher.objects.get(pk=pk)
         except Teacher.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Student not found", "student": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         teacher.delete()
-        return Response({}, status.HTTP_202_ACCEPTED)
+        return Response(
+            {"detail": "Student not found", "student": None},
+            status.HTTP_202_ACCEPTED,
+        )
 
 
 class TeacherList(ListCreateAPIView):
     """List and create new teachers"""
 
-    queryset = Teacher.objects.all().order_by("created")
+    queryset = Teacher.objects.all().order_by("-created")
     serializer_class = TeacherSerializer
     pagination_class = PageNumberPagination
     authentication_classes = [NoAuth, JWTAuthentication]
     permission_classes = []
 
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        data = response.data
+        data["detail"] = "Teachers fetched successfully"
+        data["next"] = self.paginator.get_next_link()
+        data["previous"] = self.paginator.get_previous_link()
+        data["teachers"] = data.pop("results")
+        return response
 
-class TeacherDetail(APIView):
+
+class TeacherDetail(RetrieveUpdateDestroyAPIView):
     """Teacher retrieve, update and delete"""
 
-    permission_classes = [IsOwnerOrAdminOrReadOnly]
+    serializer_class = TeacherSerializer
+    authentication_classes = [NoAuth, JWTAuthentication]
+    permission_classes = []
 
     def get(self, request, pk):
         """Retrieve a Teacher"""
         try:
             teacher = Teacher.objects.get(pk=pk)
         except Teacher.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Teacher not found", "teacher": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         serialized = TeacherSerializer(teacher)
         return Response(
             {"detail": "Teacher Fetched", "teacher": serialized.data},
@@ -224,7 +293,10 @@ class TeacherDetail(APIView):
         try:
             teacher = Teacher.objects.get(pk=pk)
         except Teacher.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Teacher not found", "teacher": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         data = request.data
         serialized = TeacherSerializer(teacher, data=data, partial=True)
         if serialized.is_valid():
@@ -233,25 +305,47 @@ class TeacherDetail(APIView):
                 {"detail": "Teacher Updated", "teacher": serialized.data},
                 status.HTTP_202_ACCEPTED,
             )
-        return Response(serialized.errors, status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {
+                "errors": serialized.errors,
+                "detail": "An error occured",
+                "teacher": None,
+            },
+            status.HTTP_400_BAD_REQUEST,
+        )
 
     def delete(self, request, pk):
         try:
             teacher = Teacher.objects.get(pk=pk)
         except Teacher.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Teacher not found", "teacher": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         teacher.delete()
-        return Response({}, status.HTTP_202_ACCEPTED)
+        return Response(
+            {"detail": "Teacher deleted", "teacher": None},
+            status.HTTP_202_ACCEPTED,
+        )
 
 
 class ParentList(ListCreateAPIView):
     """List and create new parents"""
 
-    queryset = Parent.objects.all().order_by("created")
+    queryset = Parent.objects.all().order_by("-created")
     serializer_class = ParentSerializer
     pagination_class = PageNumberPagination
     authentication_classes = [NoAuth, JWTAuthentication]
     permission_classes = []
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        data = response.data
+        data["detail"] = "Parents fetched successfully"
+        data["next"] = self.paginator.get_next_link()
+        data["previous"] = self.paginator.get_previous_link()
+        data["parents"] = data.pop("results")
+        return response
 
 
 class ParentDetail(APIView):
@@ -264,7 +358,10 @@ class ParentDetail(APIView):
         try:
             parent = Parent.objects.get(pk=pk)
         except Parent.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Parent not found", "parent": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         serialized = ParentSerializer(parent)
         return Response(
             {"detail": "Parent Fetched", "parent": serialized.data},
@@ -276,7 +373,10 @@ class ParentDetail(APIView):
         try:
             parent = Parent.objects.get(pk=pk)
         except Parent.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Parent not found", "parent": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         data = request.data
         serialized = ParentSerializer(parent, data=data, partial=True)
         if serialized.is_valid():
@@ -285,12 +385,25 @@ class ParentDetail(APIView):
                 {"detail": "Parent Updated", "parent": serialized.data},
                 status.HTTP_202_ACCEPTED,
             )
-        return Response(serialized.errors, status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {
+                "errors": serialized.errors,
+                "detail": "An error occured",
+                "parent": None,
+            },
+            status.HTTP_400_BAD_REQUEST,
+        )
 
     def delete(self, request, pk):
         try:
             parent = Parent.objects.get(pk=pk)
         except Parent.DoesNotExist:
-            return Response({}, status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "Parent not found", "parent": None},
+                status.HTTP_404_NOT_FOUND,
+            )
         parent.delete()
-        return Response({}, status.HTTP_202_ACCEPTED)
+        return Response(
+            {"detail": "Parent deleted", "parent": None},
+            status.HTTP_202_ACCEPTED,
+        )

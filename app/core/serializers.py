@@ -11,10 +11,10 @@ from .models import (
     Parent,
 )
 
-from school.models import (
-    Department,
-    # Course,
-)
+# from school.models import (
+#     # Department,
+#     # Course,
+# )
 
 
 class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -65,9 +65,6 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name", instance.first_name
         )
         instance.last_name = validated_data.get("last_name", instance.last_name)
-        instance.date_of_birth = validated_data.get(
-            "date_of_birth", instance.date_of_birth
-        )
         password = validated_data.get("password")
         if password:
             instance.set_password(password)
@@ -116,9 +113,6 @@ class StudentSerializer(serializers.ModelSerializer):
             "current_level", instance.current_level
         )
         instance.matric_no = validated_data.get("matric_no", instance.matric_no)
-        instance.department = Department.objects.get(
-            id=validated_data.get("department", instance.department).id
-        )
         instance.date_of_birth = validated_data.get(
             "date_of_birth", instance.date_of_birth
         )
