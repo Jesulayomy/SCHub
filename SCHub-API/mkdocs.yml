@@ -1,0 +1,16 @@
+site_name: SCHub-API
+extra_javascript:
+  - js/widgetla.js
+  - js/disable_shortcuts.js
+theme:
+  name: material
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  features:
+    - navigation.expand
+    - navigation.sections
+    
