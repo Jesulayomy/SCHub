@@ -1,44 +1,120 @@
-Retreives an admin from the DB
+Admin API
 ---
 tags:
   - Admins
-parameters:
-  - name: admin_id
-    in: path
-    type: string
-    required: true
-    description: The id of the admin to retrieve
-responses:
-  404:
-    description: An admin with the id does not exist
-  200:
-    description: "Request returned sucessfully"
-    schema:
-      type: object
-      items:
+get:
+  summary: Retrieves an admin from the database
+  parameters:
+    - name: admin_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the admin to retrieve
+  responses:
+    200:
+      description: Request returned successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Admin'
+          example:
+            created_at: "2017-03-25T02:17:06Z"
+            email: "jesulayomi@schub.com"
+            first_name: "Aina"
+            id: "53af4926-52ee-41d0-9acc-ae7230000001"
+            last_name: "Jesulayomi"
+            recovery_question: "What is your baby's name?"
+    404:
+      description: Admin with the specified ID does not exist
+
+put:
+  summary: Updates an existing admin
+  parameters:
+    - name: admin_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the admin to update
+    - in: body
+      name: admin_body
+      description: The body of the admin to update
+      schema:
+        type: object
         properties:
-          created_at:
-            type: string
-            description: time of creation of the User
-          id:
-            type: string
-            description: The uuid of the User
-          email:
-             type: string
-             description: User's email
-          recovery_question:
-             type: string
-             description: User's password recovery question
           first_name:
-             type: string
-             description: User's first name
+            type: string
+            description: Admin's first name
           last_name:
-             type: string
-             description: user's last name
-      example:
-        "created_at": "2017-03-25T02:17:06"
-        "email": "jesulayomi@schub.com"
-        "first_name": "Aina"
-        "id": "53af4926-52ee-41d0-9acc-ae7230000001"
-        "last_name": "Jesulayomi"
-        "recovery_question": "What is your baby's name"
+            type: string
+            description: Admin's last name
+          email:
+            type: string
+            format: email
+            description: Admin's email address
+          recovery_question:
+            type: string
+            description: Admin's password recovery question
+  responses:
+    200:
+      description: Admin updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Admin'
+          example:
+            created_at: "2017-03-25T02:17:06Z"
+            email: "aina.jesulayomi@schub.com"
+            first_name: "Aina"
+            id: "53af4926-52ee-41d0-9acc-ae7230000001"
+            last_name: "Jesulayomi"
+            recovery_question: "What is your favorite color?"
+    400:
+      description: Bad request (invalid JSON)
+    404:
+      description: Admin with the specified ID does not exist
+
+delete:
+  summary: Deletes an admin
+  parameters:
+    - name: admin_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the admin to delete
+  responses:
+    200:
+      description: Admin deleted successfully
+      content:
+        application/json:
+          schema:
+            type: object
+          example: {}
+    404:
+      description: Admin with the specified ID does not exist
+
+components:
+  schemas:
+    Admin:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: Time of creation of the admin
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the admin
+        email:
+          type: string
+          format: email
+          description: Admin's email address
+        recovery_question:
+          type: string
+          description: Admin's password recovery question
+        first_name:
+          type: string
+          description: Admin's first name
+        last_name:
+          type: string
+          description: Admin's last name
