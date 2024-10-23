@@ -4,9 +4,6 @@ from rest_framework.decorators import (
     permission_classes,
 )
 from rest_framework.generics import (
-    # GenericAPIView,
-    # ListAPIView,
-    # RetrieveAPIView,
     ListCreateAPIView,
 )
 from rest_framework.pagination import PageNumberPagination
@@ -17,17 +14,11 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from core.permissions import (
     NoAuth,
-    # CanCreate,
-    # IsOwnerOrAdminOrReadOnly,
-    # IsStaff,
-    # IsDriverOrAdminOrReadOnly,
-    # IsPassengerOrAdminOrReadOnly,
 )
 from school.models import (
     Department,
     Course,
 )
-
 from school.serializers import (
     DepartmentSerializer,
     CourseSerializer,

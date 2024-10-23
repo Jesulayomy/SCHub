@@ -297,3 +297,10 @@ class Parent(models.Model):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+@receiver(post_save, sender=Teacher)
+def update_teacher_is_staff(sender, instance=None, created=False, **kwargs):
+    if created:
+        instance.user.is_staff = True
+        instance.user.save()

@@ -1,31 +1,22 @@
 """Views for the core application"""
 # import json
 
-# from django.http import (
-#     HttpResponse,
-#     JsonResponse,
-# )
-# from django.shortcuts import render
 # from django.views.decorators.csrf import csrf_exempt
-# from rest_framework.permissions import (
-#     # AllowAny,
-#     # IsAuthenticated,
-#     # IsAuthenticatedOrReadOnly,
-# )
+from rest_framework.permissions import (
+    # AllowAny,
+    # IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
+    # IsAdminUser,
+)
 from rest_framework.decorators import (
     api_view,
     authentication_classes,
     permission_classes,
 )
 from rest_framework.generics import (
-    # GenericAPIView,
-    # ListAPIView,
     ListCreateAPIView,
-    RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.pagination import PageNumberPagination
-
-# from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -40,11 +31,8 @@ from core.models import (
 )
 from core.permissions import (
     NoAuth,
-    # CanCreate,
-    # IsOwnerOrAdminOrReadOnly,
-    # IsStaff,
-    # IsDriverOrAdminOrReadOnly,
-    # IsPassengerOrAdminOrReadOnly,
+    IsStaffOrAdminOrReadOnly,
+    IsOwnerOrStaffOrAdminOrReadOnly,
 )
 from core.serializers import (
     ParentSerializer,
@@ -95,8 +83,7 @@ class UserList(ListCreateAPIView):
     queryset = User.objects.all().order_by("-created")
     serializer_class = UserSerializer
     pagination_class = PageNumberPagination
-    authentication_classes = [NoAuth, JWTAuthentication]
-    permission_classes = []
+    permission_classes = [IsAuthenticatedOrReadOnly, IsStaffOrAdminOrReadOnly]
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
@@ -119,8 +106,7 @@ class UserList(ListCreateAPIView):
 class UserDetail(APIView):
     """User retrieve, update and delete"""
 
-    authentication_classes = [NoAuth, JWTAuthentication]
-    permission_classes = []
+    permission_classes = [IsOwnerOrStaffOrAdminOrReadOnly]
     serializer_class = UserSerializer
 
     def get(self, request, pk):
@@ -184,8 +170,7 @@ class StudentList(ListCreateAPIView):
     queryset = Student.objects.all().order_by("-created")
     serializer_class = StudentSerializer
     pagination_class = PageNumberPagination
-    authentication_classes = [NoAuth, JWTAuthentication]
-    permission_classes = []
+    permission_classes = [IsStaffOrAdminOrReadOnly]
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
@@ -212,7 +197,6 @@ class StudentDetail(APIView):
     """Student retrieve, update and delete"""
 
     permission_classes = []
-    authentication_classes = [NoAuth, JWTAuthentication]
     serializer_class = StudentSerializer
 
     def get(self, request, pk):
@@ -301,7 +285,7 @@ class TeacherList(ListCreateAPIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 
-class TeacherDetail(RetrieveUpdateDestroyAPIView):
+class TeacherDetail(APIView):
     """Teacher retrieve, update and delete"""
 
     serializer_class = TeacherSerializer
