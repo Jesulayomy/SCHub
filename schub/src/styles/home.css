@@ -110,7 +110,13 @@
     text-align: center;
     text-decoration: none;
     color: #FFFFFE;
+    transition: transform 0.3s ease;
 }
+
+#button_documentation:hover,#button_repository:hover,#button_authors:hover,#button_blogPost:hover,#button_profiles:hover{
+  transform: scale(1.03);
+}
+
 
 .carousel {
   position: relative;
