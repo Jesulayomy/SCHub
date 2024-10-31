@@ -85,10 +85,21 @@ WSGI_APPLICATION = "schub.wsgi.application"
 
 
 # Database
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+# Use MYSQL database with variables through getenv
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": getenv("DB_DEV_DB"),
+        "USER": getenv("DB_DEV_USER"),
+        "PASSWORD": getenv("DB_DEV_PASSWORD"),
+        "HOST": getenv("DB_DEV_HOST"),
+        "PORT": getenv("DB_DEV_PORT", 6313),
     }
 }
 

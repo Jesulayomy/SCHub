@@ -1,10 +1,15 @@
 DB_DEV_HOST = localhost
 DB_DEV_USER = schub_dev
-DB_DEV_PASSWORD = {PASSWORD}
+DB_DEV_PASSWORD = {DEV_PASSWORD}
 DB_DEV_DB = schub
+
 DB_TEST_HOST = localhost
 DB_TEST_USER = schub_test
-DB_TEST_PASSWORD = {PASSWORD}
-DB_TEST_DB = schub_test_db
+DB_TEST_PASSWORD = {TEST_PASSWORD}
+DB_TEST_DB = schub_test
+
+HOST = {HOST_NAME}
 SECRET_KEY = {SECRET_KEY}
-HOST = {schub.example.com OR 127.0.0.1:8000}
+
+DEV_HOST = {HOST_NAME} # For APIdocs in flask, deprecated
+DEV_PORT = 5001 # For API in flask, deprecated

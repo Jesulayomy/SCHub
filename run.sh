@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 # Colors for terminal output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -13,21 +12,22 @@ print_message() {
     echo -e "${color}${message}${NC}"
 }
 
-# Function to check if a command was successful
+# Prints if the last command was successful or not
 check_status() {
     if [ $? -eq 0 ]; then
         print_message "$GREEN" "✓ Success: $1"
+        print_message "$GREEN" "--------------------------------"
     else
         print_message "$RED" "✗ Error: $1"
+        print_message "$RED" "--------------------------------"
         exit 1
     fi
 }
 
-# Function to check Python installation
+# Checks if python is installed
 check_python() {
     print_message "$YELLOW" "Checking Python installation..."
 
-    # Check if running on Windows
     if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
         # Check for Python in Windows
         if ! command -v python.exe &> /dev/null && ! command -v python3.exe &> /dev/null; then
@@ -76,7 +76,19 @@ check_python() {
     print_message "$GREEN" "Found Python version $version"
 }
 
-# Function to install MySQL if it's not found
+# Checks if mysql is installed
+check_mysql() {
+    print_message "$YELLOW" "Checking MySQL installation..."
+
+    if ! command -v mysql &> /dev/null; then
+        print_message "$RED" "MySQL is not installed!"
+        print_message "$YELLOW" "Please install MySQL using the Full Installation option, or manually."
+        exit 1
+    else
+        print_message "$GREEN" "MySQL is installed"
+    fi
+}
+
 # Function to install MySQL if it's not found
 install_mysql() {
     print_message "$YELLOW" "Checking if MySQL is installed..."
@@ -134,7 +146,6 @@ install_mysql() {
     fi
 }
 
-
 # Function to prompt for user input with a default value
 prompt_with_default() {
     local prompt=$1
@@ -180,7 +191,7 @@ setup_venv() {
 install_python_deps() {
     print_message "$YELLOW" "Installing Python dependencies..."
     pip install --upgrade pip
-    pip install -r configurations/requirements.txt
+    pip install -r app/requirements.txt
     check_status "Python dependencies installation"
 }
 
@@ -199,16 +210,16 @@ configure_env() {
         cp configurations/environment .env
 
         # Prompt for database configuration
-        DB_DEV_PASSWORD=$(prompt_with_default "Enter development database password" "schub_dev_pwd")
-        DB_TEST_PASSWORD=$(prompt_with_default "Enter test database password" "schub_test_pwd")
+        DEV_PASSWORD=$(prompt_with_default "Enter development database password" "schub_dev_pwd")
+        TEST_PASSWORD=$(prompt_with_default "Enter test database password" "schub_test_pwd")
         SECRET_KEY=$(openssl rand -hex 32)
-        HOST=$(prompt_with_default "Enter host" "127.0.0.1:8000")
+        HOST_NAME=$(prompt_with_default "Enter host" "127.0.0.1:8000")
 
         # Update .env file
-        sed -i "s/{PASSWORD}/$DB_DEV_PASSWORD/g" .env
-        sed -i "s/{TEST_PASSWORD}/$DB_TEST_PASSWORD/g" .env
+        sed -i "s/{DEV_PASSWORD}/$DEV_PASSWORD/g" .env
+        sed -i "s/{TEST_PASSWORD}/$TEST_PASSWORD/g" .env
         sed -i "s/{SECRET_KEY}/$SECRET_KEY/g" .env
-        sed -i "s/{HOST}/$HOST/g" .env
+        sed -i "s/{HOST_NAME}/$HOST_NAME/g" .env
 
         check_status "Environment configuration"
     else
@@ -241,7 +252,7 @@ install_node_deps() {
     cd ..
 }
 
-# Function to generate and import data
+# Function to generate and import data, fix dump generator for django app
 generate_data() {
     print_message "$YELLOW" "Generating and importing data..."
     cd data/
@@ -257,12 +268,11 @@ generate_data() {
 
 # Function to reset development database
 reset_dev_db() {
-    print_message "$YELLOW" "Resetting development database..."
+    print_message "$RED" "Resetting development database..."
     read -sp "Enter MySQL root password: " MYSQL_ROOT_PASSWORD
     echo
 
-    # Drop and recreate development database
-    mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DROP DATABASE IF EXISTS schub;"
+    # Drop and recreate development database using the sql script
     mysql -u root -p"$MYSQL_ROOT_PASSWORD" < data/setup_dev_db.sql
     check_status "Development database reset"
 
@@ -280,13 +290,54 @@ reset_test_db() {
     read -sp "Enter MySQL root password: " MYSQL_ROOT_PASSWORD
     echo
 
-    # Drop and recreate test database
-    mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DROP DATABASE IF EXISTS schub_test_db;"
     mysql -u root -p"$MYSQL_ROOT_PASSWORD" < data/setup_test_db.sql
     check_status "Test database reset"
 }
 
-# Function to handle database operations
+# Sets up the applications, venv and npm
+setup_apps() {
+    print_message "$YELLOW" "Setting up applications..."
+
+    check_python
+    check_mysql
+
+    git pull
+    check_status "Repository updated"
+
+    configure_env
+    pip install -r app/requirements.txt
+    check_status "Python dependencies up to date"
+
+    cd schub
+    npm install
+    check_status "React app dependencies up to date"
+    cd ..
+}
+
+# Function to start both apps using tmux
+start_apps() {
+    print_message "$YELLOW" "Starting SCHub applications..."
+    # Check if tmux is installed
+    # if ! command -v tmux &> /dev/null; then
+    #     print_message "$RED" "tmux is not installed!"
+    #     print_message "$YELLOW" "Please run these commands manually to start the applications:"
+
+    #     exit 1
+    # else
+    #     print_message "$GREEN" "tmux is installed!"
+    #     # Check the user's default shell
+    cd app
+    source .venv/bin/activate
+    python manage.py runserver &
+    cd ../schub
+    npm start &
+    cd ..
+    # fi
+    print_message "$GREEN" "Applications started successfully!"
+    exit 0
+}
+
+# Function to clean databases
 database_operations() {
     while true; do
         echo
@@ -295,8 +346,9 @@ database_operations() {
         echo "2. Reset test database"
         echo "3. Reset both databases"
         echo "4. Return to main menu"
+        echo "5. Exit"
         echo
-        read -p "Select an option (1-4): " db_choice
+        read -p "Select an option (1-5): " db_choice
 
         case $db_choice in
             1)
@@ -311,6 +363,10 @@ database_operations() {
                 ;;
             4)
                 return
+                ;;
+            5)
+                print_message "$GREEN" "Goodbye!"
+                exit 0
                 ;;
             *)
                 print_message "$RED" "Invalid option"
@@ -330,12 +386,15 @@ main_installation() {
     install_mysql
 
     # Clone repository if not already in SCHub directory
-    if [[ ! -d ".git" ]]; then
-        print_message "$YELLOW" "Cloning SCHub repository..."
-        git clone https://github.com/Jesulayomy/SCHub.git
-        cd SCHub
-        check_status "Repository clone"
-    fi
+    # if [[ ! -d ".git" ]]; then
+    #     print_message "$YELLOW" "Cloning SCHub repository..."
+    #     git clone https://github.com/Jesulayomy/SCHub.git
+    #     cd SCHub
+    #     check_status "Repository cloned"
+    # else
+    git pull
+    check_status "Repository updated"
+    # fi
 
     # Execute installation steps
     setup_venv
@@ -363,20 +422,28 @@ main_menu() {
     while true; do
         echo
         print_message "$GREEN" "SCHub Installation and Management Menu:"
-        echo "1. Full installation"
-        echo "2. Database operations"
-        echo "3. Exit"
+        echo "1. Run Apps"
+        echo "2. Setup applications"
+        echo "3. Clean Databases"
+        echo "4. Full installation"
+        echo "0. Exit"
         echo
         read -p "Select an option (1-3): " choice
 
         case $choice in
             1)
-                main_installation
+                start_apps
                 ;;
             2)
-                database_operations
+                setup_apps
                 ;;
             3)
+                database_operations
+                ;;
+            4)
+                main_installation
+                ;;
+            0)
                 print_message "$GREEN" "Goodbye!"
                 exit 0
                 ;;
