@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../contexts/api';
 import { AuthContext } from '../contexts/AuthContext';
 import Layout from '../pages/Layout';
 import Home from '../pages/Home';
@@ -24,8 +25,8 @@ function App() {
 
   // Fetches Authentication status and logs user in
   useEffect(() => {
-    axios
-      .get('http://localhost:5000/auth/auth_status', { withCredentials: true })
+    api
+      .get('authenticated/', { withCredentials: true })
       .then((res) => {
         setIsLoading(false);
         const data = res.data;

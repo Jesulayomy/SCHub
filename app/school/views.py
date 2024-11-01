@@ -69,8 +69,8 @@ class DepartmentList(ListCreateAPIView):
         self.perform_create(serializer)
 
         data = {
-            "detail": "Course created successfully",
-            "course": serializer.data,
+            "detail": "Department created successfully",
+            "department": serializer.data,
         }
         return Response(data, status=status.HTTP_201_CREATED)
 

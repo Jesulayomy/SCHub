@@ -33,8 +33,9 @@ function Layout() {
         {!isLoggingIn &&
           (isLoggedIn ? (
             <div className='sign-div'>
+              {/* user.type.toLowerCase() */}
               <Link
-                to={`/${user.type.toLowerCase()}-dashboard`}
+                to={`/${"admin"}-dashboard`}
                 className='sign dash'
               >
                 Dashboard
@@ -46,7 +47,7 @@ function Layout() {
           ) : (
             <Link
               to='/login'
-              className='sign' 
+              className='sign'
               id='homepage_login'
               onClick={() => setIsLoggingIn(true)}
             >

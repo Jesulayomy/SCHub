@@ -18,6 +18,7 @@ function StudentManager({ loading }) {
   const [students, setStudents] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [numberShown, setNumberShown] = useState(100);
+  const [nextPage, setNextPage] = useState(1);
 
   // states for students search functionality
   const [searching, setSearching] = useState(false);
@@ -42,9 +43,9 @@ function StudentManager({ loading }) {
   useEffect(() => {
     // fetch all students
     axios
-      .get('http://localhost:5000/api/students', { withCredentials: true })
+      .get('students/', { withCredentials: true })
       .then((res) => {
-        setAllStudents(res.data);
+        setAllStudents(res.data.students);
       })
       .catch((err) => {
         console.log('Error:', err);
@@ -52,9 +53,9 @@ function StudentManager({ loading }) {
 
     // fetch all departments
     axios
-      .get('http://localhost:5000/api/departments', { withCredentials: true })
+      .get('departments/', { withCredentials: true })
       .then((res) => {
-        setDepartments(res.data);
+        setDepartments(res.data.departments);
       })
       .catch((err) => {
         console.log('Error:', err);
@@ -147,7 +148,7 @@ function StudentManager({ loading }) {
     setSearching(true);
     setStudents(
       allStudents.filter((student) => {
-        const fullName = student.first_name + ' ' + student.last_name;
+        const fullName = student.user.first_name + ' ' + student.user.last_name;
         return (
           fullName.toLowerCase().includes(searchingValue.toLowerCase()) ||
           student.matric_no.toLowerCase().includes(searchingValue.toLowerCase())

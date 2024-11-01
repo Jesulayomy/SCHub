@@ -4,7 +4,7 @@
 # from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import (
     # AllowAny,
-    # IsAuthenticated,
+    IsAuthenticated,
     IsAuthenticatedOrReadOnly,
     # IsAdminUser,
 )
@@ -73,6 +73,18 @@ def user_stats(request):
     )
 
 
+@api_view(["GET"])
+@permission_classes([])
+def authenticated(request):
+    """Returns True if user is authenticated"""
+    if request.user.is_authenticated:
+        serialized = UserSerializer(request.user)
+        return Response(
+            {"detail": "User is authenticated", "user": serialized.data}
+        )
+    return Response({"detail": "User is not authenticated", "user": None})
+
+
 class UserTokenObtainPairView(TokenObtainPairView):
     serializer_class = UserTokenObtainPairSerializer
 
@@ -106,7 +118,7 @@ class UserList(ListCreateAPIView):
 class UserDetail(APIView):
     """User retrieve, update and delete"""
 
-    permission_classes = [IsOwnerOrStaffOrAdminOrReadOnly]
+    permission_classes = [IsAuthenticated, IsOwnerOrStaffOrAdminOrReadOnly]
     serializer_class = UserSerializer
 
     def get(self, request, pk):

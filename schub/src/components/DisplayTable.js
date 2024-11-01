@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 import axios from 'axios';
+import api from '../contexts/api';
 import Button from './Button';
 import '../styles/table.css';
 
 function DisplayTable({
   type,
   data,
+  replaceData,
   setData,
   allData,
   setAllData,
@@ -28,12 +30,12 @@ function DisplayTable({
     if (type !== 'student') {
       setData(data.filter((dt) => dt.id !== id));
     }
-    axios
-      .delete(`http://localhost:5000/api/${type}s/${id}`, {
+    api
+      .delete(`${type}s/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log('Error:', err));
     backFromDelete();
@@ -82,6 +84,10 @@ function DisplayTable({
         </thead>
         <tbody>
           {data.map((dt) => {
+            replaceData = replaceData || [];
+            const departmentName = replaceData.find(dep => dep.id === dt.department)?.name || 'Not Assigned';
+            console.log(replaceData);
+            console.log(departmentName);
             return (
               <tr key={dt.id}>
                 <td>
@@ -93,7 +99,8 @@ function DisplayTable({
                 {(type === 'student' || type === 'teacher') && (
                   <td>{dt.email}</td>
                 )}
-                {type !== 'department' && <td>{dt.department}</td>}
+                {/* {type !== 'department' && <td>{dt.department}</td>} */}
+                {type === 'course' && <td>{departmentName}</td>}
                 {type === 'student' && <td>{dt.current_level}</td>}
                 {type === 'course' && <td>{dt.level}</td>}
                 {type === 'course' && <td>{dt.teacher}</td>}
