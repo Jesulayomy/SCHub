@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import api from '../contexts/api';
 import { AuthContext } from '../contexts/AuthContext';
 import UpdateForm from '../components/UpdateForm';
 import Input from '../components/Input';
@@ -32,6 +33,8 @@ function CourseManager({ loading }) {
     name: '',
     department: '',
   });
+  const [nextPage, setNextPage] = useState(1);
+  const [hasPages, setHasPages] = useState(false);
   const [updateSucess, setUpdateSucess] = useState(false);
 
   const [searching, setSearching] = useState(false);
@@ -40,26 +43,58 @@ function CourseManager({ loading }) {
 
   useEffect(() => {
     // fetch all courses
-    axios
-      .get('http://localhost:5000/api/courses', { withCredentials: true })
+    api
+      .get('courses/', { withCredentials: true })
       .then((res) => {
-        setAllCourses(res.data);
-        setCourses(res.data);
+        if (res.data.next) {
+          setHasPages(true);
+          setNextPage(nextPage + 1);
+          console.log('Has more pages');
+          console.log('Next page:', nextPage);
+        }
+        setAllCourses(res.data.courses);
+        setCourses(res.data.courses);
       })
       .catch((err) => {
         console.log('Error:', err);
       });
 
     // fetch all departments
-    axios
-      .get('http://localhost:5000/api/departments', { withCredentials: true })
+    api
+      .get('departments/', { withCredentials: true })
       .then((res) => {
-        setDepartments(res.data);
+        setDepartments(res.data.departments);
       })
       .catch((err) => {
         console.log('Error:', err);
       });
   }, []);
+
+  function loadMore() {
+    setHasPages(false);
+    console.log('Loading more courses');
+    console.log('Getting page:', nextPage);
+    api
+      .get(`courses/?page=${nextPage}`, { withCredentials: true })
+      .then((res) => {
+        setCourses([...courses, ...res.data.courses]);
+        if (res.data.next) {
+          setNextPage(nextPage + 1);
+          setHasPages(true);
+          console.log('Has more pages');
+          console.log('Next page:', nextPage);
+        }
+      })
+      .catch((err) => {
+        console.log('Error:', err);
+      });
+  }
+
+  useEffect(() => {
+    if (hasPages) {
+      loadMore();
+    }
+  }, [hasPages]);
 
   function handleSearch() {
     if (searchingValue.length === 0) {
@@ -98,7 +133,7 @@ function CourseManager({ loading }) {
         setCourses(
           allCourses.filter(
             (course) =>
-              course.level === value &&
+              // course.level === value &&
               course.department === filteringDepartment.value
           )
         );
@@ -122,8 +157,8 @@ function CourseManager({ loading }) {
         setCourses(
           allCourses.filter(
             (course) =>
-              course.department === value &&
-              course.level === filteringLevel.value
+              course.department === value // &&
+              // course.level === filteringLevel.value
           )
         );
       } else {
@@ -154,7 +189,7 @@ function CourseManager({ loading }) {
   return loading ? (
     <LoadingPage />
   ) : isLoggedIn ? (
-    user.type === 'Admin' ? (
+    // user.type === 'Admin' ? (
       <section className='manage'>
         {updating ? (
           <UpdateForm
@@ -235,6 +270,7 @@ function CourseManager({ loading }) {
             <DisplayTable
               type='course'
               data={courses}
+              replaceData={departments}
               setData={setCourses}
               allData={allCourses}
               setAllData={setAllCourses}
@@ -245,9 +281,10 @@ function CourseManager({ loading }) {
           </>
         )}
       </section>
-    ) : (
-      <Navigate replace to={`/${user.type.toLowerCase()}-dashboard`} />
-    )
+    // ) : (
+    //   // user.type.toLowerCase()
+    //   <Navigate replace to={`/${"admin"}-dashboard`} />
+    // )
   ) : (
     <Navigate replace to='/login' />
   );
