@@ -1,31 +1,71 @@
-Retrieves all departments from the DB
+Departments API
 ---
 tags:
   - Departments
-responses:
-  200:
-    description: "Request returned successfully"
-    schema:
-      type: array
-      items:
-        type: object
-        properties:
-          created_at:
-            type: string
-            description: time of creation of the Department
-          id:
-            type: string
-            description: The uuid of the Department
-          name:
-            type: string
-            description: Department's name
-      example:
-        - created_at: "2017-03-25T02:17:06"
-          id: "53af4926-52ee-41d0-9acc-ae7230300001"
-          name: "Aerospace Engineering"
-        - created_at: "2017-03-25T02:17:06"
-          id: "53af4926-52ee-41d0-9acc-ae7230300002"
-          name: "Aerothermal Engineering"
-        - created_at: "2017-03-25T02:17:06"
-          id: "53af4926-52ee-41d0-9acc-ae7230300003"
-          name: "Agricultural Engineering"
+get:
+  summary: Retrieves all departments from the database
+  responses:
+    200:
+      description: Request returned successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Department'
+          example:
+            - created_at: "2017-03-25T02:17:06"
+              id: "53af4926-52ee-41d0-9acc-ae7230300001"
+              name: "Agricultural Engineering"
+            - created_at: "2017-03-25T02:17:06"
+              id: "53af4926-52ee-41d0-9acc-ae7230300002"
+              name: "Mechanical Engineering"
+
+post:
+  summary: Creates a new department
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/DepartmentCreate'
+        example:
+          name: "Computer Science"
+  responses:
+    201:
+      description: Department created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Department'
+          example:
+            created_at: "2023-04-15T10:30:00Z"
+            id: "53af4926-52ee-41d0-9acc-ae7230300003"
+            name: "Computer Science"
+    400:
+      description: Bad request (missing required fields or invalid JSON)
+
+components:
+  schemas:
+    Department:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The UUID of the department
+        name:
+          type: string
+          description: Name of the department
+        created_at:
+          type: string
+          format: date-time
+          description: Time of creation of the department record
+    DepartmentCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the department
