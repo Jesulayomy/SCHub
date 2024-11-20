@@ -1,33 +1,130 @@
-Retrieves a student from the DB
+Student API
 ---
 tags:
   - Students
-parameters:
-  - name: student_id
-    in: path
-    type: string
-    required: true
-    description: The id of the student to retrieve
-responses:
-  404:
-    description: A student with the id does not exist
-  200:
-    description: "Request returned successfully"
-    schema:
+
+get:
+  summary: Retrieves a student from the database
+  parameters:
+    - name: student_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the student to retrieve
+  responses:
+    200:
+      description: Request returned successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Student'
+          example:
+            created_at: "2023-04-15T10:30:00Z"
+            id: "53af4926-52ee-41d0-9acc-ae7230000001"
+            first_name: "John"
+            last_name: "Doe"
+            age: 20
+            matric_no: "2023/001"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            department: "Computer Science"
+            start_level: 100
+            current_level: 200
+            email: "john.doe@example.com"
+    404:
+      description: Student with the specified ID does not exist
+put:
+  summary: Updates a student record using Student ID
+  parameters:
+    - name: student_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the student to update
+    - in: body
+      name: student_body
+      description: The body of the student to update
+      schema:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: Student's first name
+          last_name:
+            type: string
+            description: Student's last name
+          age:
+            type: integer
+            description: Student's age
+          matric_no:
+            type: string
+            description: Student's matriculation number
+          current_level:
+            type: integer
+            description: Student's current academic level
+          email:
+            type: string
+            format: email
+            description: Student's email address
+          department_id:
+            type: string
+            format: uuid
+  responses:
+    200:
+      description: Student updated successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Student'
+          example:
+            created_at: "2023-04-15T10:30:00Z"
+            id: "53af4926-52ee-41d0-9acc-ae7230000001"
+            first_name: "John"
+            last_name: "Doe"
+            age: 20
+            matric_no: "2023/001"
+            department_id: "53af4926-52ee-41d0-9acc-ae7230300001"
+            department: "Computer Science"
+            start_level: 100
+            current_level: 200
+            email: "john.doe@example.com"
+    400:
+      description: Invalid request body
+    404:
+      description: Student with the specified ID does not exist
+  
+
+delete:
+  summary: Deletes a student
+  parameters:
+    - name: student_id
+      in: path
+      type: string
+      required: true
+      description: The ID of the student to delete
+  responses:
+    200:
+      description: Student deleted successfully
+      content:
+        application/json:
+          schema:
+            type: object
+          example: {}
+    404:
+      description: Student with the specified ID does not exist
+
+components:
+  schemas:
+    Student:
       type: object
       properties:
         created_at:
           type: string
-          description: Time of creation of the Student
+          format: date-time
+          description: Time of creation of the student record
         id:
           type: string
-          description: The UUID of the Student
-        email:
-          type: string
-          description: Student's email
-        recovery_question:
-          type: string
-          description: Student's password recovery question
+          format: uuid
+          description: The UUID of the student
         first_name:
           type: string
           description: Student's first name
@@ -37,31 +134,23 @@ responses:
         age:
           type: integer
           description: Student's age
-        current_level:
-          type: integer
-          description: Student's current academic level
-        department:
-          type: string
-          description: Student's department
-        department_id:
-          type: string
-          description: The UUID of the Student's department
         matric_no:
           type: string
           description: Student's matriculation number
+        department_id:
+          type: string
+          format: uuid
+          description: The UUID of the student's department
+        department:
+          type: string
+          description: Name of the student's department
         start_level:
           type: integer
           description: Student's starting academic level
-      example:
-        created_at: "2017-03-25T02:17:06"
-        email: "ALIRIZAP@schub.com"
-        first_name: "ALIRIZA"
-        id: "53af4926-52ee-41d0-9acc-ae7230200030"
-        last_name: "PALYOLOGOS"
-        recovery_question: "What is your favorite football team?"
-        age: 30
-        current_level: 400
-        department: "Agricultural Engineering"
-        department_id: "53af4926-52ee-41d0-9acc-ae7230300003"
-        matric_no: "202210030AP"
-        start_level: 400
+        current_level:
+          type: integer
+          description: Student's current academic level
+        email:
+          type: string
+          format: email
+          description: Student's email address
