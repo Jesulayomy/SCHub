@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../contexts/api';
 import validator from 'validator';
 import { AuthContext } from '../contexts/AuthContext';
 import Form from '../components/Form';
@@ -45,17 +46,28 @@ function Login() {
 
     setLoggingIn(true);
 
-    axios
+    api
       .post(
-        'http://localhost:5000/auth/login',
-        { type, email, password },
+        'token/',
+        { email, password },
         { withCredentials: true }
       )
       .then((res) => {
         const data = res.data;
         setLoggingIn(false);
+        localStorage.setItem('token', data.access);
         login(data.user);
       })
+      // .then(() => {
+      //   api
+      //     .get('users/3494b95c-ba72-4850-97e7-a08f46cc102a/', { withCredentials: true })
+      //     .then((res) => {
+      //       console.log(res.data);
+      //     })
+      //     .catch((err) => {
+      //       console.log('Error:', err);
+      //     });
+      // })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
           setPasswordError({
@@ -93,7 +105,7 @@ function Login() {
   }
 
   return isLoggedIn ? (
-    <Navigate replace to={`/${user.type.toLowerCase()}-dashboard`} />
+    <Navigate replace to={`/${type.toLowerCase()}-dashboard`} />
   ) : (
     <div className='form-container'>
       {startLogin ? (

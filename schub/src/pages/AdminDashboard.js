@@ -10,7 +10,7 @@ function AdminDashboard({ loading }) {
   return loading ? (
     <LoadingPage />
   ) : isLoggedIn ? (
-    user.type === 'Admin' ? (
+    // user.type === 'Admin' ? (
       <section className='admin-dashboard'>
         <h1>Welcome {user.first_name}</h1>
         <p>What would you like to do today?</p>
@@ -23,9 +23,9 @@ function AdminDashboard({ loading }) {
         <Link to='/admin-dashboard/departments'>Manage Departments</Link>
         <br />
       </section>
-    ) : (
-      <Navigate replace to={`/${user.type.toLowerCase()}-dashboard`} />
-    )
+    // ) : (
+    //   <Navigate replace to={`/${user.type.toLowerCase()}-dashboard`} />
+    // )
   ) : (
     <Navigate replace to='/login' />
   );

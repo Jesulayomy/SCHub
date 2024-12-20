@@ -26,6 +26,7 @@ urlpatterns = [
     path("schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path("token/", views.UserTokenObtainPairView.as_view(), name="token"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
+    path("authenticated/", views.authenticated, name="authenticated"),
     path("status/", views.api_status, name="status"),
     path("user-stats/", views.user_stats, name="user_stats"),
     path("users/", views.UserList.as_view(), name="user_list"),
