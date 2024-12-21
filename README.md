@@ -78,6 +78,14 @@ On another terminal . . .
 {"admins":53,"courses":127,"departments":24,"students":1357,"teachers":32}
 ```
 
+### Installation – Django
+
+```bash
+/SCHub $ cd app
+# Pending
+```
+
+
 ## Usage
 
 ### API
