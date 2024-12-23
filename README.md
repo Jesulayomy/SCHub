@@ -171,7 +171,3 @@ Please make sure to update tests as appropriate and document changes properly.
 | --- | --- | --- | --- | --- |
 | <img src="https://avatars.githubusercontent.com/u/113533393?s=96&v=4" alt="Jesulayomy" width="80px"> | <img src="https://avatars.githubusercontent.com/u/108087255?v=4" alt="Micoliser" width="80px"> | <img src="https://avatars.githubusercontent.com/u/103280525?v=4" alt="Rani" width="80px"> | <img src="https://avatars.githubusercontent.com/u/124374867?v=4" alt="Shobit" width="80px"> | <img src="https://avatars.githubusercontent.com/u/74444943?v=4" alt="Sreedeep" width="80px"> |
 | [Jesulayomy](https://github.com/Jesulayomy) | [Micoliser](https://github.com/micoliser) | [Rani](https://github.com/Rani1303) | [Shobhit](https://github.com/shobhit15082003) | [Sreedeep](https://github.com/Sreedeep-rougeloop) |
-
-## Licensing
-
-MIT License
