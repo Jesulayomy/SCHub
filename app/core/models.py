@@ -134,7 +134,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         _("ID"), primary_key=True, default=uuid4, editable=False
     )
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now=True, null=True)
     email = models.EmailField(
         _("email address"), db_index=True, unique=True, max_length=255
     )
@@ -152,15 +152,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     # )
     # Optional
     # Permissions
-    is_active = models.BooleanField(_("active"), default=True)
-    is_staff = models.BooleanField(_("staff status"), default=False)
+    is_active = models.BooleanField(_("active"), null=True, default=True)
+    is_staff = models.BooleanField(_("staff status"), null=True, default=False)
     # is_student = models.BooleanField(
     #     _('student status'), default=False
     # )
     # is_alumni = models.BooleanField(
     #     _('alumni status'), default=False
     # )
-    is_superuser = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False, null=True)
 
     objects = CustomUserManager()
     # Django Settings

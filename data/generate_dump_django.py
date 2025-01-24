@@ -6,15 +6,20 @@ table1.xlsx -> table2.csv -> dump.sql <- file.csv <- file.xlsx
 
 import csv
 import pandas as pd
-from hashlib import md5
+
+# from hashlib import md5
+# import uuid
+from django.contrib.auth.hashers import make_password
 
 
-def hasher(string):
-    """hashes a string and returns teh hashed value"""
-
-    md5_hash = md5()
-    md5_hash.update(string.encode("utf-8"))
-    return md5_hash.hexdigest()
+def hasher(password):
+    """hashes a string and returns the hashed value"""
+    hashed = make_password(password)
+    print(hashed)
+    return hashed
+    # md5_hash = md5()
+    # md5_hash.update(string.encode("utf-8"))
+    # return md5_hash.hexdigest()
 
 
 def csv_parse(xlsx_file_path):
@@ -56,11 +61,12 @@ def csv_parse(xlsx_file_path):
         dtypes[key] = dtype[key]
 
     df.astype(dtypes)
-    try:
-        df["password"] = df["password"].apply(hasher)
-        df["recovery_answer"] = df["recovery_answer"].apply(hasher)
-    except Exception:
-        pass
+    # try:
+    #     df[["password", "recovery_answer"]] = df[["password", "recovery_answer"]].map(lambda x: make_password(x))
+    #     # df["password"] = df["password"].apply(make_password)
+    #     # df["recovery_answer"] = df["recovery_answer"].apply(make_password)
+    # except Exception:
+    #     pass
     df.to_csv(
         filename, index=False, quoting=csv.QUOTE_NONNUMERIC, quotechar="'"
     )
@@ -76,17 +82,17 @@ def csv_parse(xlsx_file_path):
 def writeAdmin():
     """Returns the sql statement to insert data to the admins table"""
 
-    prompt = "INSERT INTO `admins` (id, created_at, first_name, last_name, \
-email, password, recovery_question, recovery_answer) VALUES "
+    prompt = "INSERT INTO `core_user` (id, created, first_name, last_name, \
+email, password, recovery_question, recovery_answer, is_active, is_staff, is_superuser) VALUES "
     write_data = csv_parse("admins.xlsx")
 
     info = ""
     for row in write_data[1:]:
         info += "("
-        for cell in row:
+        info += f"{row[0].replace('-', '')},"
+        for cell in row[1:]:
             info += cell + ","
-        info = info[:-1]
-        info += "),"
+        info += "1,1,1),"
 
     info = info[:-1]
     statement = prompt + info + ";\n"
@@ -94,89 +100,89 @@ email, password, recovery_question, recovery_answer) VALUES "
     return statement
 
 
-def writeDept():
-    """Returns the sql statement to insert data to the departments table"""
+# def writeDept():
+#     """Returns the sql statement to insert data to the departments table"""
 
-    prompt = "INSERT INTO `departments` (id, name, created_at) VALUES "
-    write_data = csv_parse("departments.xlsx")
+#     prompt = "INSERT INTO `departments` (id, name, created_at) VALUES "
+#     write_data = csv_parse("departments.xlsx")
 
-    info = ""
-    for row in write_data[1:]:
-        info += "("
-        for cell in row:
-            info += cell + ","
-        info = info[:-1]
-        info += "),"
+#     info = ""
+#     for row in write_data[1:]:
+#         info += "("
+#         for cell in row:
+#             info += cell + ","
+#         info = info[:-1]
+#         info += "),"
 
-    info = info[:-1]
-    statement = prompt + info + ";\n"
+#     info = info[:-1]
+#     statement = prompt + info + ";\n"
 
-    return statement
-
-
-def writeTeach():
-    """Returns the sql statement to insert data to the teachers table"""
-
-    prompt = "INSERT INTO `teachers` (department_id, id, created_at, \
-first_name, last_name, email, password, recovery_question, \
-recovery_answer) VALUES "
-    write_data = csv_parse("teachers.xlsx")
-
-    info = ""
-    for row in write_data[1:]:
-        info += "("
-        for cell in row:
-            info += cell + ","
-        info = info[:-1]
-        info += "),"
-
-    info = info[:-1]
-    statement = prompt + info + ";\n"
-
-    return statement
+#     return statement
 
 
-def writeCourse():
-    """Returns the sql statement to insert data to the courses table"""
+# def writeTeach():
+#     """Returns the sql statement to insert data to the teachers table"""
 
-    prompt = "INSERT INTO `courses` (name, level, department_id, teacher_id, \
-id, created_at) VALUES "
-    write_data = csv_parse("courses.xlsx")
+#     prompt = "INSERT INTO `teachers` (department_id, id, created_at, \
+# first_name, last_name, email, password, recovery_question, \
+# recovery_answer) VALUES "
+#     write_data = csv_parse("teachers.xlsx")
 
-    info = ""
-    for row in write_data[1:]:
-        info += "("
-        for cell in row:
-            info += cell + ","
-        info = info[:-1]
-        info += "),"
+#     info = ""
+#     for row in write_data[1:]:
+#         info += "("
+#         for cell in row:
+#             info += cell + ","
+#         info = info[:-1]
+#         info += "),"
 
-    info = info[:-1]
-    statement = prompt + info + ";\n"
+#     info = info[:-1]
+#     statement = prompt + info + ";\n"
 
-    return statement
+#     return statement
 
 
-def writeStudent():
-    """Returns the sql statement to insert data to the students table"""
+# def writeCourse():
+#     """Returns the sql statement to insert data to the courses table"""
 
-    prompt = "INSERT INTO `students` (age, start_level, current_level, \
-matric_no, department_id, id, created_at, first_name, last_name, email, \
-password, recovery_question, recovery_answer) VALUES "
-    write_data = csv_parse("students.xlsx")
+#     prompt = "INSERT INTO `courses` (name, level, department_id, teacher_id, \
+# id, created_at) VALUES "
+#     write_data = csv_parse("courses.xlsx")
 
-    info = ""
-    for row in write_data[1:]:
-        info += "("
-        for cell in row:
-            info += cell + ","
-        info = info[:-1]
-        info += "),"
+#     info = ""
+#     for row in write_data[1:]:
+#         info += "("
+#         for cell in row:
+#             info += cell + ","
+#         info = info[:-1]
+#         info += "),"
 
-    info = info[:-1]
-    statement = prompt + info + ";\n"
+#     info = info[:-1]
+#     statement = prompt + info + ";\n"
 
-    return statement
+#     return statement
+
+
+# def writeStudent():
+#     """Returns the sql statement to insert data to the students table"""
+
+#     prompt = "INSERT INTO `students` (age, start_level, current_level, \
+# matric_no, department_id, id, created_at, first_name, last_name, email, \
+# password, recovery_question, recovery_answer) VALUES "
+#     write_data = csv_parse("students.xlsx")
+
+#     info = ""
+#     for row in write_data[1:]:
+#         info += "("
+#         for cell in row:
+#             info += cell + ","
+#         info = info[:-1]
+#         info += "),"
+
+#     info = info[:-1]
+#     statement = prompt + info + ";\n"
+
+#     return statement
 
 
 def generateSQL():
@@ -185,10 +191,10 @@ def generateSQL():
         statements = [
             "USE schub;\n",
             writeAdmin(),
-            writeDept(),
-            writeTeach(),
-            writeCourse(),
-            writeStudent(),
+            # writeDept(),
+            # writeTeach(),
+            # writeCourse(),
+            # writeStudent(),
         ]
 
         dump.writelines(statements)
