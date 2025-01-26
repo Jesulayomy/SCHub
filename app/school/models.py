@@ -64,7 +64,6 @@ class Course(models.Model):
     name = models.CharField(
         _("name"),
         max_length=60,
-        unique=True,
     )
     department = models.ForeignKey(
         Department,
@@ -79,6 +78,10 @@ class Course(models.Model):
         related_name="courses",
         null=True,
         default=None,
+    )
+    level = models.IntegerField(
+        _("level"),
+        default=0,
     )
 
     class Meta:

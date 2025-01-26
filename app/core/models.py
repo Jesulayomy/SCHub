@@ -206,11 +206,11 @@ class Student(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    age = models.IntegerField(
-        _("age"),
-        null=True,
-        blank=True,
-    )
+    # age = models.IntegerField(
+    #     _("age"),
+    #     null=True,
+    #     blank=True,
+    # )
     start_level = models.IntegerField(_("start level"), default=1)
     current_level = models.IntegerField(
         _("current level"),
