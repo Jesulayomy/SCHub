@@ -111,12 +111,15 @@ def writeDjangoTeach():
                 "recovery_question": teacher["recovery_question"],
                 "recovery_answer": teacher["recovery_answer"],
             }
-            user = User.objects.create(**user_data)
+            user = User.objects.get_or_create(**user_data)[0]
             user.save()
+            dept = Department.objects.get(id=teacher["department_id"])
+
             teacher_data = {
                 "id": teacher["id"],
                 "created": teacher["created"],
                 "user": user,
+                "department": dept,
             }
             teacher = Teacher.objects.create(**teacher_data)
             teacher.save()
