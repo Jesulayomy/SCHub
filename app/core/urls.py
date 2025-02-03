@@ -10,7 +10,7 @@ from drf_spectacular.views import (
 
 # from rest_framework.authtoken import views as auth_views
 from rest_framework_simplejwt.views import (
-    # TokenObtainPairView,
+    TokenBlacklistView,
     TokenRefreshView,
 )
 
@@ -25,8 +25,9 @@ urlpatterns = [
     ),
     path("schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path("token/", views.UserTokenObtainPairView.as_view(), name="token"),
-    path("token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
+    path("logout/", TokenBlacklistView.as_view(), name="logout"),
     path("authenticated/", views.authenticated, name="authenticated"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
     path("status/", views.api_status, name="status"),
     path("user-stats/", views.user_stats, name="user_stats"),
     path("users/", views.UserList.as_view(), name="user_list"),

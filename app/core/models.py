@@ -253,6 +253,13 @@ class Teacher(models.Model):
     )
     created = models.DateTimeField(_("created at"), auto_now_add=True)
     updated = models.DateTimeField(_("updated at"), auto_now=True)
+    department = models.ForeignKey(
+        "school.department",
+        on_delete=models.SET_NULL,
+        related_name="teachers",
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         """Meta class for the teacher model"""

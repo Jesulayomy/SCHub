@@ -1,7 +1,5 @@
 """Views for the core application"""
-# import json
 
-# from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import (
     # AllowAny,
     IsAuthenticated,

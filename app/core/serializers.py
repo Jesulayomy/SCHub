@@ -101,7 +101,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """Updates students"""
-        instance.age = validated_data.get("age", instance.age)
+        # instance.age = validated_data.get("age", instance.age)
         instance.start_level = validated_data.get(
             "start_level", instance.start_level
         )
@@ -130,6 +130,7 @@ class TeacherSerializer(serializers.ModelSerializer):
             "user",
             "created",
             "updated",
+            "department",
         ]
         extra_kwargs = {
             "id": {"read_only": True},

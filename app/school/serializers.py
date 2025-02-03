@@ -44,7 +44,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         """Update an existing department"""
         instance.name = validated_data.get("name", instance.name)
-        instance.head = validated_data.get("head", instance.teacher)
+        instance.head = validated_data.get("head", instance.head)
         instance.save()
         return instance
 
@@ -63,6 +63,7 @@ class CourseSerializer(serializers.ModelSerializer):
             "teacher",
             "created",
             "updated",
+            "level",
         ]
         extra_kwargs = {
             "id": {"read_only": True},
@@ -81,6 +82,7 @@ class CourseSerializer(serializers.ModelSerializer):
             "department", instance.department
         )
         instance.teacher = validated_data.get("teacher", instance.teacher)
+        instance.level = validated_data.get("level", instance.level)
         instance.save()
         return instance
 
